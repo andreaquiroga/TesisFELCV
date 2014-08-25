@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Felcv</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+	<div id="myCarousel" class="carousel slide">
+		<ol class="carousel-indicators">
+	        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	        <li data-target="#myCarousel" data-slide-to="1"></li>
+	        <li data-target="#myCarousel" data-slide-to="2"></li>
+	    </ol>
+	  <!-- Carousel items -->
+	    <div class="carousel-inner">
+	      <div class="active item"><%= image_tag '1.png', :alt => "College Building", :margin=> 0%></div>
+	      <div class="item"><%= image_tag '2.png', :alt=>"College Building" %></div>
+	      <div class="item"><%= image_tag '3.png', :alt=>"College Building" %></div>
+	    </div>
+	  <!-- Carousel nav -->
+	    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+	    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	</div>
+	<%= render 'layouts/navbar' %>
+	<div class="row">
+		<div class="col-lg-2"></div>
+	    <div class="col-lg-8">
+	    	<div class="jumbotron">
+				<%= render 'layouts/header' %>
+				<%= yield %>
+				<!--<%= render 'layouts/footer' %>-->
+			</div>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</body>
+</html>

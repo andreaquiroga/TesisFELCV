@@ -1,0 +1,30 @@
+<center><h2>REGISTRAR CASO</h2></center><br/>
+  <%= form_for @case, :url => { :action => :create }, :method=>'post' do |c|%>
+  	<% if @case.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@case.errors.count, "errorre") %> encontrados:</h2>
+          <ul>
+          <% @case.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+	  <div class="row">
+	  	<div class="col-lg-1">
+	  	</div>
+	  	<div class="col-lg-11">
+	      <%= c.hidden_field  :id %>
+          <label>Codigo:</label>
+          <%= c.text_field :code, :class=>'form-control' %>
+          <label>Fecha de apertura del caso:</label>
+          <%= c.text_field :init_date, 'data-behaviour' => 'datepicker', :class=>'form-control'%>
+  <%end%>
+
+<%= link_to 'Back', cases_path %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker();
+  })
+</script>
+
