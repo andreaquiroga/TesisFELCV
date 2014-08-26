@@ -2,10 +2,6 @@ Felcv::Application.routes.draw do
 
   resources :locations
 
-  resources :people
-
-  resources :links
-
   devise_for :users,:controllers => { :registrations =>'registration'}
   get "welcome/index"
   get "officials/new/:user_id" => "officials#new", :as => "new_official"
@@ -22,7 +18,7 @@ Felcv::Application.routes.draw do
   get 'cases/simple_search' => 'cases#simple_search', :as => 'simple_search'
   get 'cases/advanced_search' => 'cases#advanced_search', :as => 'advanced_search'
 
-#complaint
+  #complaint
   get 'complaints/index' => 'complaints#index', :as => 'complaints'
   get 'complaints/view/:id' => 'complaints#show', :as => 'complaint'
   get 'complaints/new/:case_id' => 'complaints#new', :as => 'new_complaint'
@@ -32,6 +28,17 @@ Felcv::Application.routes.draw do
   get 'complaints/destroy/:id' => 'complaints#destroy', :as => 'destroy_complaint'
   get 'complaints/key_pass/:id' => 'complaints#key_pass', :as => 'key_pass'
   get 'complaints/sign/:id' => 'complaints#sign', :as => 'sign_complaint'
+
+  #people
+  get 'people/index' => 'people#index', :as => 'people'
+  get 'people/view/:id' => 'people#show', :as => 'person'
+  get 'people/new/:case_id' => 'people#new', :as => 'new_person'
+  post 'people/create' => 'people#create', :as => 'create_person'
+  get 'people/continue_new/:person_id' => 'people#continue_new', :as => 'continue_new_person'
+  post 'people/continue_create' => 'people#continue_create', :as => 'continue_create_person'
+  get 'people/edit/:id' => 'people#edit', :as => 'edit_person'
+  post 'people/update' => 'people#update', :as => 'update_person'
+  get 'people/destroy/:id' => 'people#destroy', :as => 'destroy_person'
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

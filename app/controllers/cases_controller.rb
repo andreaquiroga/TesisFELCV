@@ -8,21 +8,10 @@ class CasesController < ApplicationController
   end
 
   def advanced_search
-    if params[:nature].blank?
-      @cases1=Array.new
-      #@cases1= Case.advanced_search_nature(params[:nature]) 
-    else
-      @cases1= Case.advanced_search_nature(params[:nature]) 
-      #@cases1=Array.new
-    end
-    if params[:researcher].blank?
-      #@cases2= Case.advanced_search_researcher(params[:researcher])
-      @cases2=Array.new
-    else
-      #@cases2=Array.new
-      @cases2= Case.advanced_search_researcher(params[:researcher])
-    end
-    @cases=(@cases1+@cases2).uniq
+    @cases1= Case.advanced_search_nature(params[:nature]) 
+    @cases2= Case.advanced_search_researcher(params[:researcher])
+    @cases3= Case.advanced_search_person(params[:name])
+    @cases=(@cases1&@cases2&@cases3).uniq
   end
 
   # GET /cases

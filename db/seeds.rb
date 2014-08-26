@@ -7,3 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 grades = Grade.create([{name: "SUBTENIENTE"}, {name: "TENIENTE"}, {name: "CAPITAN"}, {name: "MAYOR"}, {name: "TENIENTE CORONEL"}, {name: "CORONEL"}])
 roles = Role.create([{name: "admin"}, {name: "investigador"}, {name: "directora"}, {name: "secretaria"}])
+civil = CivilStatus.create([{name: "Soltero"}, {name: "Casado"}, {name: "Divorciado"}, {name: "Viudo"}, {name: "Concubinado"}])
+

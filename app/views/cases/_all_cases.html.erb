@@ -1,0 +1,56 @@
+<center><h2>CASOS</h2></center>
+<br/>
+<form class="navbar-form navbar-left" method="get" action=<%=simple_search_path%> >
+  
+    <label>Codigo: </label>
+    <%= text_field_tag :code, params[:code], :class=>'form-control' %>
+    <button class="btn btn-primary" type="submit">Buscar</button>
+    
+</form>
+<br/><br/><br/><br/>
+
+  <div class="accordion" id="accordion2">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><h5>
+            BUSQUEDA AVANZADA>>
+            </h5>
+        </a>
+      </div>
+      <div id="collapseOne" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-10">
+              <form class="navbar-form navbar-left" method="get" action=<%=advanced_search_path%> >
+              <label>Tipo de Agresion:</label> <%= text_field_tag :nature, params[:nature], :class=>'form-control' %><br/>
+              <label>Persona:</label> <%= text_field_tag :name, params[:name], :class=>'form-control' %><br/>
+              <label>Investigador: </label><%= text_field_tag :researcher, params[:researcher] , :class=>'form-control'%><br/>
+              
+                <button class="btn btn-primary" type="submit">Buscar</button>
+              </form>
+            </div>
+            <div class="col-lg-1">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <% @cases.each do |c| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <b><h4><%= link_to c.code, case_path(c.id.to_s)%></h4></b>
+        <span>Fecha inicio: <b><%= c.init_date %></b></span>&nbsp;&nbsp;
+        <span>Fecha conclusion: <b><%= c.end_date %></b></span><br/>
+        <span>Investigador: <b><%= c.user.official.name %></b></span><br/>
+        <span>Tipo de agresion: <b><%= c.complaint.nature %></b></span><br/>
+      </div>
+    </div>
+  <% end %>
+            
+    

@@ -20,22 +20,31 @@ class Case < ActiveRecord::Base
 	end
 
 	def self.advanced_search_nature(nature)
-	  if nature
-		find(:all, :joins => :complaint,:conditions =>['nature LIKE ?', "%#{nature}%"])
+	  if nature.blank?
+		find(:all)
 	  else
-	  	find(:all)
+	  	find(:all, :joins => :complaint,:conditions =>['nature LIKE ?', "%#{nature}%"])
       end
 	end
 
 	def self.advanced_search_researcher(researcher)
-	  if researcher
-		find(:all, :joins => {:user=>:official},:conditions =>['name LIKE ?', "%#{researcher}%"])
+	  if researcher.blank?
+		find(:all)
 	  else
-	  	find(:all)
+	  	find(:all, :joins => {:user=>:official},:conditions =>['name LIKE ?', "%#{researcher}%"])
       end
 	end
 
-	def self.has_complaint
+	def self.advanced_search_person(person)
+	  if person.blank?
+		find(:all)
+	  else
+	  	find(:all, :joins => {:links=>:person},:conditions =>['name LIKE ?', "%#{person}%"])
+      end
+	end
+
+	def self.has_complaint(id)
+	  Complaint.where(:case_id=>id)
 	end
 
 end
