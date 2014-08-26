@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825182641) do
+ActiveRecord::Schema.define(version: 20140826031559) do
 
   create_table "cases", force: true do |t|
     t.string   "code"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20140825182641) do
   end
 
   add_index "cases", ["user_id"], name: "index_cases_on_user_id"
+
+  create_table "complaints", force: true do |t|
+    t.date     "fact_date"
+    t.string   "place"
+    t.time     "fact_time"
+    t.string   "cincunstancial_relation"
+    t.string   "nature"
+    t.string   "aggressor_relation"
+    t.integer  "case_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "complaints", ["case_id"], name: "index_complaints_on_case_id"
 
   create_table "grades", force: true do |t|
     t.string   "name"

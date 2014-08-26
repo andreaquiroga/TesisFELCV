@@ -1,0 +1,42 @@
+<center><h2>REGISTRAR DENUNCIA</h2></center>
+<%= form_for @complaint , :url => { :action => :create }, :method=>'post'  do |r| %>
+  	<% if @complaint.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@complaint.errors.count, "errorre") %> encontrados:</h2>
+          <ul>
+          <% @complaint.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+	  <div class="row">
+	  	  <div class="col-lg-1">
+	  	  </div>
+	  	  <div class="col-lg-11">
+	        <%= r.hidden_field  :id %>
+	        <%= r.hidden_field  :case_id %>
+	        <label>Fecha aproximada: </label>
+    		<%= r.text_field :fact_date, 'data-behaviour' => 'datepicker', :class=>'form-control' %>
+    		<label>Hora aproximada: </label><br/>
+    		<%= r.time_select :fact_time, :class=>'form-control' %><br/>
+    		<label>Lugar del hecho: </label>
+    		<%= r.text_field :place, :class=>'form-control' %>
+    		<label>Naturaleza: </label>
+    		<%= r.text_field :nature, :class=>'form-control' %>
+    		<label>Relacion victima/agresor: </label>
+    		<%= r.text_field :aggressor_relation, :class=>'form-control' %>
+    		<label>Relacion Circunstancial: </label>
+    		<%= r.text_area :cincunstancial_relation, :class=>'form-control' %>
+    		<br/>
+    		<div><%= r.submit "Guardar", :class=>"btn btn-primary" %></div><br/>
+    	  </div>
+    	</div>
+<% end %>
+
+<%= link_to 'Atras', complaints_path %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker();
+  })
+</script>

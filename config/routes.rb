@@ -15,10 +15,23 @@ Felcv::Application.routes.draw do
   get 'cases/index' => 'cases#index', :as => 'cases'
   get 'cases/view/:id' => 'cases#show', :as => 'case'
   get 'cases/new' => 'cases#new', :as => 'new_case'
-  get 'cases/create' => 'cases#create', :as => 'create_case'
+  post 'cases/create' => 'cases#create', :as => 'create_case'
   get 'cases/edit/:id' => 'cases#edit', :as => 'edit_case'
   get 'cases/update/:id' => 'cases#update', :as => 'update_case'
   get 'cases/destroy/:id' => 'cases#destroy', :as => 'destroy_case'
+  get 'cases/simple_search' => 'cases#simple_search', :as => 'simple_search'
+  get 'cases/advanced_search' => 'cases#advanced_search', :as => 'advanced_search'
+
+#complaint
+  get 'complaints/index' => 'complaints#index', :as => 'complaints'
+  get 'complaints/view/:id' => 'complaints#show', :as => 'complaint'
+  get 'complaints/new/:case_id' => 'complaints#new', :as => 'new_complaint'
+  post 'complaints/create' => 'complaints#create', :as => 'create_complaint'
+  get 'complaints/edit/:id' => 'complaints#edit', :as => 'edit_complaint'
+  post 'complaints/update' => 'complaints#update', :as => 'update_complaint'
+  get 'complaints/destroy/:id' => 'complaints#destroy', :as => 'destroy_complaint'
+  get 'complaints/key_pass/:id' => 'complaints#key_pass', :as => 'key_pass'
+  get 'complaints/sign/:id' => 'complaints#sign', :as => 'sign_complaint'
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

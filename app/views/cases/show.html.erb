@@ -1,4 +1,33 @@
-<p id="notice"><%= notice %></p>
+<ul class="nav nav-tabs">
+  <li class=""><a href="#home" data-toggle="tab">Formulario de Denuncia</a></li>
+  <li class=""><a href="#profile" data-toggle="tab">Formulario de Accion Directa</a></li>
+  <li class="dropdown active">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Personas involucradas <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li class=""><a href="#dropdown1" data-toggle="tab">Action</a></li>
+      <li class="divider"></li>
+      <li class="active"><a href="#dropdown2" data-toggle="tab">Another action</a></li>
+    </ul>
+  </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade" id="home">
+  <br/>
+    <a href=<%=new_complaint_path(@case.id)%>> Registrar</a>
+  </div>
+  <div class="tab-pane fade" id="profile">
+    
+  </div>
+  <div class="tab-pane fade" id="dropdown1">
+    
+  </div>
+  <div class="tab-pane fade active in" id="dropdown2">
+    
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_case_path(@case) %> |
-<%= link_to 'Back', cases_path %>
+
+<%= link_to 'Editar', edit_case_path(@case) %> |
+<%= link_to 'Atras', cases_path %>

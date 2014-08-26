@@ -1,6 +1,30 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show, :edit, :update, :destroy]
 
+  #simple search
+  def simple_search
+    @cases = Case.search(params[:code])
+    
+  end
+
+  def advanced_search
+    if params[:nature].blank?
+      @cases1=Array.new
+      #@cases1= Case.advanced_search_nature(params[:nature]) 
+    else
+      @cases1= Case.advanced_search_nature(params[:nature]) 
+      #@cases1=Array.new
+    end
+    if params[:researcher].blank?
+      #@cases2= Case.advanced_search_researcher(params[:researcher])
+      @cases2=Array.new
+    else
+      #@cases2=Array.new
+      @cases2= Case.advanced_search_researcher(params[:researcher])
+    end
+    @cases=(@cases1+@cases2).uniq
+  end
+
   # GET /cases
   # GET /cases.json
   def index
@@ -29,7 +53,7 @@ class CasesController < ApplicationController
     @case.user_id=current_user.id
     respond_to do |format|
       if @case.save
-        format.html { redirect_to cases_path, notice: 'Caso creado!.' }
+        format.html { redirect_to case_path(@case.id), notice: 'Caso creado!.' }
         
       else
         format.html { render action: 'new' }

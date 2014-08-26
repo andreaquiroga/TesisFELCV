@@ -19,6 +19,7 @@
           <%= c.text_field :code, :class=>'form-control' %>
           <label>Fecha de apertura del caso:</label>
           <%= c.text_field :init_date, 'data-behaviour' => 'datepicker', :class=>'form-control'%>
+          <div><%= c.submit "Guardar", :class=>"btn btn-primary" %></div><br/>
   <%end%>
 
 <%= link_to 'Back', cases_path %>
