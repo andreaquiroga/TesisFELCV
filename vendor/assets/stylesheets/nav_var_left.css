@@ -1,0 +1,32 @@
+.navbar-inner {
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+}
+.navbar .nav > li {
+    float: none;
+}
+.navbar .nav > li a {
+    padding: 10px 0 10px 20px;
+}
+.navbar ul.sub-level {
+    display: none;
+}
+.navbar li:hover .sub-level {
+    position: relative;
+    left: 45px;
+    top: 0px;
+    display: block;
+}
+.span2 .nav >li a {
+    width: 120px;
+}
+.span3 .nav >li a {
+    width: 200px;
+}
+.span4 .nav >li a {
+    width: 280px;
+}
+.icon_align {
+    margin-left: 28px;
+}

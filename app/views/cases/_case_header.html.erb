@@ -1,0 +1,37 @@
+<!--
+<ul class="nav nav-pills">
+  <li><a href=<%=new_complaint_path(@case.id)%>>Denuncia <span class="badge"></span></a></li>
+  <li><a href=<%=new_person_path(@case.id)%>>Personas <span class="badge">3</span></a></li>
+  <li><a href="#">Messages <span class="badge">3</span></a></li>
+</ul>
+-->
+
+<ul class="nav nav-tabs">
+  <li class=""><a href="#complaint" data-toggle="tab">Formulario de Denuncia</a></li>
+  <li class=""><a href="#" data-toggle="tab">Formulario de Accion Directa</a></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Personas involucradas <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li class=""><a href="#people" data-toggle="tab">Agregar Persona</a></li>
+      <li class="divider"></li>
+      <li class="active"><a href="#dropdown2" data-toggle="tab">Ver Personas</a></li>
+    </ul>
+  </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade" id="complaint">
+  <br/>
+    <%= render :partial =>'complaints/new' %>
+  </div>
+  <div class="tab-pane fade" id="profile">
+    <%= render :partial =>'people/new' %>
+  </div>
+  <div class="tab-pane fade" id="people">
+    <%= render :partial =>'people/new' %>
+  </div>
+  <div class="tab-pane fade active in" id="dropdown2">
+    
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-lg-2">
+  	<%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+      	<center><h3>ACCION DIRECTA</h3></center><br/>
+      	<h5>
+		  <strong>Nombre:</strong>
+		  <%= @direct_action.police_name %>
+		</h5>
+		<h5>
+		  <strong>Fecha:</strong>
+		  <%= @direct_action.fact_date %>
+		</h5>
+		<h5>
+		  <strong>Hora:</strong>
+		  <%= @direct_action.fact_time %>
+		</h5>
+		<h5>
+		  <strong>Lugar:</strong>
+		  <%= @direct_action.place %>
+		</h5>
+		<h5>
+		  <strong>Naturaleza:</strong>
+		  <%= @direct_action.nature %>
+		</h5>
+		<h5>
+		  <strong>Relato del Hecho:</strong>
+		  <%= @direct_action.cincunstancial_relation %>
+		</h5>
+      <br/><br/>
+      <%= link_to 'Edit', edit_direct_action_path(@direct_action) %>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+

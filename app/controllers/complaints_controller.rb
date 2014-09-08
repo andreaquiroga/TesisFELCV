@@ -1,5 +1,5 @@
 class ComplaintsController < ApplicationController
-  before_action :set_complaint, only: [:show, :edit, :update, :destroy]
+  before_action :set_complaint, only: [:show, :edit, :destroy]
 
   # GET /complaints
   # GET /complaints.json
@@ -10,16 +10,19 @@ class ComplaintsController < ApplicationController
   # GET /complaints/1
   # GET /complaints/1.json
   def show
+     @case=Case.find(@complaint.case_id)
   end
 
   # GET /complaints/new
   def new
     @complaint = Complaint.new
     @complaint.case_id=params[:case_id]
+    @case=Case.find(params[:case_id])
   end
 
   # GET /complaints/1/edit
   def edit
+    @case=Case.find(@complaint.case_id)
   end
 
   # POST /complaints
@@ -39,9 +42,10 @@ class ComplaintsController < ApplicationController
   # PATCH/PUT /complaints/1
   # PATCH/PUT /complaints/1.json
   def update
+    @complaint = Complaint.find(params[:complaint][:id])
     respond_to do |format|
       if @complaint.update(complaint_params)
-        format.html { redirect_to @complaint, notice: 'Complaint was successfully updated.' }
+        format.html { redirect_to complaint_path(@complaint.id), notice: 'Denuncia modificada.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

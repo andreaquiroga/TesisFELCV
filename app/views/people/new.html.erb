@@ -1,57 +1,59 @@
-<h2>REGISTRAR DATOS PERSONA INVOLUCRADA</h2>
-
-<%gender = [['Masculino', 'Masculino'], ['Femenino', 'Femenino']]%>
-<%role = [['Victima', 'Victima'], ['Agresor/a', 'Agresor'], ['Denunciante','Denunciante'], ['Testigo','Testigo']]%>
-
-<%= form_for @person , :url => { :action => :create }, :method=>'post' do |f| %>
-
-<% if @person.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@person.errors.count, "errorre") %> encontrados:</h2>
-      <ul>
-      <% @person.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
 <div class="row">
-  <div class="col-lg-1">
+  <div class="col-lg-2">
+    <%= render :partial => 'layouts/left_menu' %>
   </div>
-  <div class="col-lg-11">
-    <%= f.fields_for @link do |l| %>
-      <center>
-        <label><b>Relacion con el Caso:</b></label>
-        <%= l.hidden_field  :id, :class=>"form-control"%>
-        <%= l.hidden_field  :case_id , :class=>"form-control"%>
-        <%= l.select :role, options_for_select(role) , :class=>"form-control"%>
-      </center>
-    <%end%>
-	<label>CI:</label>
-    <%= f.hidden_field  :id %>
-	<%= f.text_field :ci , :class=>"form-control"%>
-    <label>Nombre:</label>
-    <%= f.text_field :name , :class=>"form-control"%>
-    <label>Apellido Paterno:</label>
-    <%= f.text_field :paternal_last_name , :class=>"form-control"%>
-    <label>Apellido Materno:</label>
-	<%= f.text_field :maternal_last_name , :class=>"form-control"%>
-	<label>Fecha de nacimiento:</label>
-	<%= f.text_field :birthdate, 'data-behaviour' => 'datepicker' , :class=>"form-control"%>
-	<label>Genero:</label>
-    <%= f.select :gender, options_for_select(gender) , :class=>"form-control"%>
-    <label>Estado Civil:</label>
-    <%= f.collection_select :civil_status, CivilStatus.all, :name, :name, {prompt: "-Seleccionar un estado civil-"}, {class:"form-control"} %><br/>
-    <label>Nacionalidad:</label>                    
-    <%= f.text_field :nationality , :class=>"form-control"%>
-    <label>Ciudad de Nacimiento:</label>
-    <%= f.text_field :natural_of , :class=>"form-control"%>
-
-	<label>Telefono:</label>
-	<%= f.text_field :phone , :class=>"form-control"%>
-	<label>Celular:</label>
-	<%= f.text_field :mobile , :class=>"form-control"%><br/>
-	<div><%= f.submit "Guardar", :class=>"btn btn-primary" %></div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+        <center><h3>REGISTRAR DATOS PERSONA INVOLUCRADA</h3></center>
+        <%= form_for @person , :url => { :action => :create }, :method=>'post' do |f| %>
+          <% if @person.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@person.errors.count, "errorre") %> encontrados:</h2>
+                <ul>
+                <% @person.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= f.fields_for @link do |l| %>
+            <%= l.hidden_field  :id, :class=>"form-control"%>
+            <%= l.hidden_field  :case_id , :class=>"form-control"%>
+            <label><b>Relacion con el Caso:</b></label>      
+            <%= l.collection_select :role, PersonRole.all, :text, :text, {prompt: "-Seleccionar un papel-"}, {class:"form-control"} %><br/>
+          <%end%>
+          <%= f.hidden_field  :id %>
+        	<label>CI:</label>
+        	<%= f.text_field :ci , :class=>"form-control"%>
+          <label>Nombre:</label>
+          <%= f.text_field :name , :class=>"form-control"%>
+          <label>Apellido Paterno:</label>
+          <%= f.text_field :paternal_last_name , :class=>"form-control"%>
+          <label>Apellido Materno:</label>
+        	<%= f.text_field :maternal_last_name , :class=>"form-control"%>
+        	<label>Fecha de nacimiento:</label>
+        	<%= f.text_field :birthdate, 'data-behaviour' => 'datepicker' , :class=>"form-control"%>
+        	<label>Genero:</label>
+          <%= f.collection_select :gender, Gender.all, :text, :text, {prompt: "-Seleccionar un genero-"}, {class:"form-control"} %><br/>
+          <label>Estado Civil:</label>
+          <%= f.collection_select :civil_status, CivilStatus.all, :name, :name, {prompt: "-Seleccionar un estado civil-"}, {class:"form-control"} %><br/>
+          <label>Nacionalidad:</label>                    
+          <%= f.text_field :nationality , :class=>"form-control"%>
+          <label>Ciudad de Nacimiento:</label>
+          <%= f.text_field :natural_of , :class=>"form-control"%>
+        	<label>Telefono:</label>
+        	<%= f.text_field :phone , :class=>"form-control"%>
+        	<label>Celular:</label>
+        	<%= f.text_field :mobile , :class=>"form-control"%><br/>
+        	<div><%= f.submit "Guardar", :class=>"btn btn-primary" %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
 
@@ -60,5 +62,5 @@
     $('[data-behaviour~=datepicker]').datepicker();
   })
 </script>
-<% end %>
+
 

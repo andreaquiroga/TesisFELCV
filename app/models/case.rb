@@ -10,6 +10,8 @@ class Case < ActiveRecord::Base
 	belongs_to :user
 	has_many :links
 	has_one :complaint
+	has_one :interview
+	has_one :direct_action
 
 	def self.search(search)
 	  if search

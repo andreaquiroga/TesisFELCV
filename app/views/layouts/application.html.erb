@@ -25,14 +25,11 @@
 	    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 	</div>
 	<%= render 'layouts/navbar' %>
+	<%= render 'layouts/header' %>
 	<div class="row">
-		<div class="col-lg-2"></div>
-	    <div class="col-lg-8">
-	    	<div class="jumbotron">
-				<%= render 'layouts/header' %>
-				<%= yield %>
-				<!--<%= render 'layouts/footer' %>-->
-			</div>
+		<div class="col-lg-1"></div>
+	    <div class="col-lg-9">
+			<%= yield %>
 		</div>
 		<div class="col-lg-2"></div>
 	</div>

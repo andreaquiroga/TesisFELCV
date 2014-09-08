@@ -1,0 +1,19 @@
+		  <div class="modal" id="basicModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    <%= form_for @question, :url => { :action => :create_question }, :method=>'post' do |q| %>
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title">Nueva Pregunta</h4>
+		      </div>
+		      <div class="modal-body">
+		       <label>Pregunta: </label><p><%= q.text_area :text, :class=>'form-control' %></p>
+		       <label>Respuesta: </label><p><%= q.text_area :answer, :class=>'form-control' %></p>
+		      </div>
+		      <div class="modal-footer">
+		        <div><%= q.submit "A&ntilde;adir", :class=>"btn btn-primary" %></div>
+		      </div>
+		    <%end%>
+		    </div>
+		  </div>
+		  </div>

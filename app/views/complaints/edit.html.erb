@@ -1,6 +1,53 @@
-<h1>Editing complaint</h1>
+<div class="row">
+  <div class="col-lg-2">
+    <%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+        <center><h3>EDITAR DENUNCIA</h3></center>
+        <%= form_for @complaint , :url => { :action => :update }, :method=>'post'  do |r| %>
+          <% if @complaint.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@complaint.errors.count, "errorre") %> encontrados:</h2>
+                <ul>
+                <% @complaint.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= r.hidden_field  :id %>
+    	    <%= r.hidden_field  :case_id %>
+    	    <label>Fecha aproximada: </label>
+        	<%= r.text_field :fact_date, 'data-behaviour' => 'datepicker', :class=>'form-control' %>
+        	<label>Hora aproximada: </label><br/>
+        	<%= r.time_select :fact_time, :class=>'form-control' %><br/>
+        	<label>Lugar del hecho: </label>
+        	<%= r.text_field :place, :class=>'form-control' %>
+        	<label>Naturaleza: </label>
+        	<%= r.text_field :nature, :class=>'form-control' %>
+        	<label>Relacion victima/agresor: </label>
+        	<%= r.text_field :aggressor_relation, :class=>'form-control' %>
+        	<label>Relacion Circunstancial: </label>
+        	<%= r.text_area :cincunstancial_relation, :class=>'form-control' %>
+        	<br/>
+        	<div><%= r.submit "Guardar", :class=>"btn btn-primary" %></div><br/> 
+        	<%= link_to 'Atras', complaint_path %>	
+      <% end %>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
 
-<%= render 'form' %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker();
+  })
+</script>
 
-<%= link_to 'Show', @complaint %> |
-<%= link_to 'Back', complaints_path %>
+

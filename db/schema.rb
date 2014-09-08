@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826075748) do
+ActiveRecord::Schema.define(version: 20140907201533) do
 
   create_table "cases", force: true do |t|
     t.string   "code"
@@ -44,11 +44,58 @@ ActiveRecord::Schema.define(version: 20140826075748) do
 
   add_index "complaints", ["case_id"], name: "index_complaints_on_case_id"
 
+  create_table "direct_actions", force: true do |t|
+    t.string   "police_name"
+    t.string   "police_station"
+    t.string   "police_ci"
+    t.string   "police_grade"
+    t.string   "station_zone"
+    t.string   "station_acronym"
+    t.string   "police_phone"
+    t.date     "fact_date"
+    t.string   "place"
+    t.time     "fact_time"
+    t.string   "nature"
+    t.string   "cincunstancial_relation"
+    t.integer  "case_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "direct_actions", ["case_id"], name: "index_direct_actions_on_case_id"
+
+  create_table "genders", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "grades", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "interviews", force: true do |t|
+    t.string   "resume"
+    t.boolean  "sign"
+    t.integer  "case_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interviews", ["case_id"], name: "index_interviews_on_case_id"
+
+  create_table "items", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "place"
+    t.integer  "direct_action_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "items", ["direct_action_id"], name: "index_items_on_direct_action_id"
 
   create_table "links", force: true do |t|
     t.string   "role"
@@ -71,25 +118,6 @@ ActiveRecord::Schema.define(version: 20140826075748) do
     t.datetime "updated_at"
   end
 
-  create_table "officials", force: true do |t|
-    t.integer  "ci"
-    t.string   "name"
-    t.string   "paternal_last_name"
-    t.string   "maternal_last_name"
-    t.string   "grade"
-    t.string   "address"
-    t.string   "phone"
-    t.string   "mobile"
-    t.string   "admission_date"
-    t.string   "birthdate"
-    t.string   "last_work"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "officials", ["user_id"], name: "index_officials_on_user_id"
-
   create_table "people", force: true do |t|
     t.integer  "ci"
     t.string   "name"
@@ -111,8 +139,30 @@ ActiveRecord::Schema.define(version: 20140826075748) do
     t.datetime "updated_at"
   end
 
+  create_table "person_roles", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", force: true do |t|
+    t.string   "text"
+    t.string   "answer"
+    t.integer  "interview_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["interview_id"], name: "index_questions_on_interview_id"
+
   create_table "roles", force: true do |t|
     t.string "name"
+  end
+
+  create_table "user_statuses", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -129,6 +179,18 @@ ActiveRecord::Schema.define(version: 20140826075748) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.integer  "ci"
+    t.string   "name"
+    t.string   "paternal_last_name"
+    t.string   "maternal_last_name"
+    t.string   "grade"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "mobile"
+    t.string   "admission_date"
+    t.string   "birthdate"
+    t.string   "last_work"
+    t.string   "status"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

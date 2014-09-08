@@ -23,11 +23,30 @@ class CasesController < ApplicationController
   # GET /cases/1
   # GET /cases/1.json
   def show
+    @case=Case.find(params[:id])
+    #@complaint=Complaint.where(:case_id=>params[:id]).first
+    @complaint=Complaint.new
+    @person=Person.new
+    @link=Link.new
+    
   end
 
   # GET /cases/new
   def new
     @case = Case.new
+    @case.user_id = current_user.id
+    @case.init_date = Date.today
+    @case.code="felcv"
+    @case.save
+    @case_complete = Case.find(@case.id)
+    @case_complete.code = "felcv-"+@case.id.to_s+"-cbba"
+    if @case_complete.save
+      flash[:notice] = "Caso creado."
+      redirect_to case_path(@case.id)
+    else
+      flash[:notice] = "Error al crear el caso, contacte al administrador."
+      redirect_to root_path
+    end
   end
 
   # GET /cases/1/edit
@@ -38,17 +57,6 @@ class CasesController < ApplicationController
   # POST /cases
   # POST /cases.json
   def create
-    @case = Case.new(case_params)
-    @case.user_id=current_user.id
-    respond_to do |format|
-      if @case.save
-        format.html { redirect_to case_path(@case.id), notice: 'Caso creado!.' }
-        
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @case.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /cases/1

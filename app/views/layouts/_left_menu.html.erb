@@ -1,0 +1,22 @@
+<nav class="nav nav-pills nav-stacked">
+<div class="navbar-inner">
+<ul class="nav">
+  <% if @case.complaint==nil %>
+    <li><%= link_to "Denuncia", new_complaint_path(@case.id) %><i class="icon-home icon-large"></i></li>
+  <% else %>
+    <li><%= link_to "Denuncia", complaint_path(@case.complaint.id) %><i class="icon-home icon-large"></i></li>
+  <% end %>
+  <% if @case.direct_action==nil %>
+    <li><%= link_to "Acción Directa", new_direct_action_path(@case.id) %><i class="icon-home icon-large"></i></li>
+  <% else %>
+    <li><%= link_to "Acción Directa", direct_action_path(@case.direct_action.id) %><i class="icon-home icon-large"></i></li>
+  <% end %>
+  <li><%= link_to "Personas", new_person_path(@case.id) %></li>
+  <% if @case.interview==nil %>
+    <li><%= link_to "Entrevistas", new_interview_path(@case.id) %></li>
+  <% else %>
+    <li><%= link_to "Entrevistas", edit_interview_path(@case.interview.id) %></li>
+  <% end %>
+</ul>
+</div>
+</nav>

@@ -1,12 +1,13 @@
 Felcv::Application.routes.draw do
 
-  resources :locations
 
-  devise_for :users,:controllers => { :registrations =>'registration'}
+
+  #index
   get "welcome/index"
-  get "officials/new/:user_id" => "officials#new", :as => "new_official"
-  post "officials/create" => "officials#create", :as => "create_official"
 
+  #users
+  devise_for :users,:controllers => { :registrations =>'registration'}
+  
   #cases
   get 'cases/index' => 'cases#index', :as => 'cases'
   get 'cases/view/:id' => 'cases#show', :as => 'case'
@@ -14,20 +15,30 @@ Felcv::Application.routes.draw do
   post 'cases/create' => 'cases#create', :as => 'create_case'
   get 'cases/edit/:id' => 'cases#edit', :as => 'edit_case'
   get 'cases/update/:id' => 'cases#update', :as => 'update_case'
-  get 'cases/destroy/:id' => 'cases#destroy', :as => 'destroy_case'
   get 'cases/simple_search' => 'cases#simple_search', :as => 'simple_search'
   get 'cases/advanced_search' => 'cases#advanced_search', :as => 'advanced_search'
 
   #complaint
-  get 'complaints/index' => 'complaints#index', :as => 'complaints'
   get 'complaints/view/:id' => 'complaints#show', :as => 'complaint'
   get 'complaints/new/:case_id' => 'complaints#new', :as => 'new_complaint'
   post 'complaints/create' => 'complaints#create', :as => 'create_complaint'
   get 'complaints/edit/:id' => 'complaints#edit', :as => 'edit_complaint'
   post 'complaints/update' => 'complaints#update', :as => 'update_complaint'
-  get 'complaints/destroy/:id' => 'complaints#destroy', :as => 'destroy_complaint'
   get 'complaints/key_pass/:id' => 'complaints#key_pass', :as => 'key_pass'
   get 'complaints/sign/:id' => 'complaints#sign', :as => 'sign_complaint'
+
+   #direct_actions
+  get 'direct_actions/view/:id' => 'direct_actions#show', :as => 'direct_action'
+  get 'direct_actions/new/:case_id' => 'direct_actions#new', :as => 'new_direct_action'
+  post 'direct_actions/create' => 'direct_actions#create', :as => 'create_direct_action'
+  get 'direct_actions/edit/:id' => 'direct_actions#edit', :as => 'edit_direct_action'
+  post 'direct_actions/update' => 'direct_actions#update', :as => 'update_direct_action'
+  get 'direct_actions/key_pass/:id' => 'direct_actions#key_pass', :as => 'key_pass_direct_action'
+  get 'direct_actions/sign/:id' => 'direct_actions#sign', :as => 'sign_direct_action'
+  get 'direct_actions/create_item/:id' => 'direct_actions#create_item', :as => 'create_item'
+  get 'direct_actions/edit_item/:id_direct_action' => 'direct_actions#edit_item', :as => 'edit_item'
+  get 'direct_actions/destroy_item/:id_direct_action' => 'direct_actions#destroy_item', :as => 'destroy_item'
+  post 'direct_action/save' => 'direct_actions#save_direct_action', :as => 'save_direct_action'
 
   #people
   get 'people/index' => 'people#index', :as => 'people'
@@ -39,6 +50,20 @@ Felcv::Application.routes.draw do
   get 'people/edit/:id' => 'people#edit', :as => 'edit_person'
   post 'people/update' => 'people#update', :as => 'update_person'
   get 'people/destroy/:id' => 'people#destroy', :as => 'destroy_person'
+
+  #interview
+  get 'interviews/view/:id' => 'interviews#show', :as => 'interview'
+  get 'interviews/new/:case_id' => 'interviews#new', :as => 'new_interview'
+  post 'interviews/create' => 'interviews#create', :as => 'create_interview'
+  post 'interviews/create_question' => 'interviews#create_question', :as => 'create_question'
+  get 'interviews/edit/:id' => 'interviews#edit', :as => 'edit_interview'
+  post 'interviews/update/:id' => 'interviews#update', :as => 'update_interview'
+  get 'interviews/destroy/:id' => 'interviews#destroy', :as => 'destroy_interview'
+  get 'interviews/destroy_question/:id' => 'interviews#destroy_question', :as => 'destroy_question'
+  get 'interviews/edit_question/:id' => 'interviews#edit_question', :as => 'edit_question'
+  get 'interviews/sign/:id' => 'interviews#sign', :as => 'sign_interview'
+  get 'interviews/key_pass/:id' => 'interviews#key_pass', :as => 'key_pass_interview'
+  
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

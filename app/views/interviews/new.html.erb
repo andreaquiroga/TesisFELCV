@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-lg-2">
+    <%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+        <center><h3>REGISTRAR CUESTIONARIO</h3></center>
+        <%= form_for @interview, :url => { :action => :create }, :method=>'post' do |f| %>
+  		  <% if @interview.errors.any? %>
+    	    <div id="error_explanation">
+      		  <h2><%= pluralize(@interview.errors.count, "errore") %> no se puede guardar por los siguientes problemas:</h2>
+      		  <ul>
+      			<% @interview.errors.full_messages.each do |msg| %>
+        		  <li><%= msg %></li>
+      			<% end %>
+      		  </ul>
+    		</div>
+  		  <% end %>
+  		  <%= f.hidden_field :case_id %>
+    	  <%= f.hidden_field :id %>
+    	  <h5 align="justify"><%=@interview.resume%></h5>
+
+		 <%end%>
+     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Pregunta</a>
+        <%= render 'new_question' %>
+      </div>
+    </div>
+   </div>
+   </div>
+</div>

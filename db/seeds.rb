@@ -8,4 +8,7 @@
 grades = Grade.create([{name: "SUBTENIENTE"}, {name: "TENIENTE"}, {name: "CAPITAN"}, {name: "MAYOR"}, {name: "TENIENTE CORONEL"}, {name: "CORONEL"}])
 roles = Role.create([{name: "admin"}, {name: "investigador"}, {name: "directora"}, {name: "secretaria"}])
 civil = CivilStatus.create([{name: "Soltero"}, {name: "Casado"}, {name: "Divorciado"}, {name: "Viudo"}, {name: "Concubinado"}])
-
+gender = Gender.create([{text: "Femenino"}, {text: "Masculino"}])
+person_role = PersonRole.create([{text: "Victima"}, {text: "Agresor"}, {text: "Denunciante"}, {text: "Testigo"}])
+user_status = UserStatus.create([{text: "Activo"}, {text: "Inactivo"}, {text: "Vacaciones"}, {text: "Baja medica"}])
+#admin = User.new(email: "admin@gmail.com", password: "administrador", password_confirmation:"administrador", role: roles.first, ci: 00000, name: "admin", paternal_name: "admin", maternal_name: "admin", grade: "CORONEL", )

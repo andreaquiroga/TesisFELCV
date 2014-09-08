@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-lg-2">
+  	<%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+        <center><h2>REGISTRAR ACCION DIRECTA</h2></center><br/><br/>
+        <%= form_for @direct_action , :url => { :action => :update }, :method=>'post'  do |d| %>
+          <% if @direct_action.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@direct_action.errors.count, "errorre") %> encontrados:</h2>
+                <ul>
+                <% @direct_action.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= d.hidden_field  :id %>
+          <%= d.hidden_field  :case_id %>
+          <u><b><h4>POLICIA INTERVINIENTE</h4></b></u>
+          <label>Nombre Completo:</label>
+          <%= d.text_field :police_name, :class=>'form-control' %>
+          <label>CI:</label>
+          <%= d.text_field :police_ci, :class=>'form-control' %>
+          <label>Grado:</label>
+          <%=d.collection_select(:police_grade, Grade.all, :name, :name, {prompt: "-Seleccionar un grado-"}, {class:"form-control"})%><br/>
+          <label>Telefono/Celular:</label>
+          <%= d.text_field :police_phone, :class=>'form-control' %>
+          <label>Unidad:</label>
+          <%= d.text_field :police_station, :class=>'form-control' %>
+          <label>Zona unidad:</label>
+          <%= d.text_field :station_zone, :class=>'form-control' %>
+          <label>Sigla:</label>
+          <%= d.text_field :station_acronym, :class=>'form-control' %>
+          <u><b><h4>DATOS DEL HECHO</h4></b></u>
+          <label>Fecha aproximada: </label>
+          <%= d.text_field :fact_date, 'data-behaviour' => 'datepicker', :class=>'form-control' %>
+          <label>Hora aproximada: </label><br/>
+          <%= d.time_select :fact_time, :class=>'form-control' %><br/>
+          <label>Lugar del hecho: </label>
+          <%= d.text_field :place, :class=>'form-control' %>
+          <label>Naturaleza: </label>
+          <%= d.text_field :nature, :class=>'form-control' %>
+          <label>Relato del hecho: </label>
+          <%= d.text_area :cincunstancial_relation, :class=>'form-control' %><br/>
+          <% if @direct_action.items!=nil %>
+          <ul class="list-group"> 
+	    	    <%@direct_action.items.each do |p|%>
+	    	    <li class="list-group-item">
+  		    	  <h5>Nombre <b><%=p.name%></b></h5>
+  				  <h5>Descripcion.- <%=p.description%></h5>
+  				  <h5>Lugar.- <%=p.place%></h5>
+  		      	  <span class="icon-edit icon-black" style="vertical-align:-1px;  margin-right:0px; "></span><%= link_to 'Editar', edit_item_path(p.id) %>|
+  				    <span class="icon-remove-circle icon-black" style="vertical-align:-1px;  margin-right:0px; "></span> <%= link_to 'Eliminar', destroy_item_path(p.id), data: { confirm: 'Confirma que desea eliminar el objeto?'} %>
+				</li>
+			    <%end%>
+		  </ul>
+		  <div><%= d.submit "Guardar", :class=>"btn btn-primary"%></div><br/><br/>
+		  <% end %>
+		  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Objeto</a>
+        <%= render 'new_item' %><br/>
+          
+		  
+        <% end %>
+        
+        <%= link_to 'Atras', direct_action_path(@direct_action.id) %>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker();
+  })
+</script>
+
+<%= link_to 'Atras', direct_action_path(@direct_action.id) %>

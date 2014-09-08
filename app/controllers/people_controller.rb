@@ -16,6 +16,7 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @link=Link.new
+    @case= Case.find(params[:case_id])
     @link.case_id=params[:case_id]
    # @location_work=Location.new
    # @location_work.place="trabajo"

@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-lg-2">
+    <%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+        <center><h3>REGISTRAR CUESTIONARIO</h3></center>
+        <%= form_for @interview, :url => { :action => :update }, :method=>'post' do |f| %>
+  		  <% if @interview.errors.any? %>
+    	    <div id="error_explanation">
+      		  <h2><%= pluralize(@interview.errors.count, "errore") %> no se puede guardar por los siguientes problemas:</h2>
+      		  <ul>
+      			<% @interview.errors.full_messages.each do |msg| %>
+        		  <li><%= msg %></li>
+      			<% end %>
+      		  </ul>
+    		</div>
+  		  <% end %>
+  		  <br/>
+  		  <%= f.hidden_field :case_id %>
+    	  <%= f.hidden_field :id %>
+    	  <h5 align="justify"><%=@interview.resume%></h5>
+    	   
+      		 <ul class="list-group"> 
+	    	    <%@interview.questions.each do |p|%>
+	    	    <li class="list-group-item">
+  		    	  <h5>PREGUNTA.- <b><%=p.text%></b></h5>
+  				    <h5>RESPUESTA.- <%=p.answer%></h5>
+  		      	<span class="icon-edit icon-black" style="vertical-align:-1px;  margin-right:0px; "></span><%= link_to 'Editar', edit_question_path(p.id) %>|
+  				    <span class="icon-remove-circle icon-black" style="vertical-align:-1px;  margin-right:0px; "></span> <%= link_to 'Eliminar', destroy_question_path(p.id), data: { confirm: 'Confirma que desea eliminar la pregunta?'} %>
+				    </li>
+			      <%end%>
+			     </ul>
+		  	
+		  <br/>
+    	  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Pregunta</a>
+		  <div class="modal" id="basicModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    <%= form_for @question, :url => { :action => :create_question }, :method=>'post' do |q| %>
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title">Nueva Pregunta</h4>
+		      </div>
+		      <div class="modal-body">
+		       <label>Pregunta: </label><p><%= q.text_area :text, :class=>'form-control' %></p>
+		       <label>Respuesta: </label><p><%= q.text_area :answer, :class=>'form-control' %></p>
+		      </div>
+		      <div class="modal-footer">
+		        <div><%= q.submit "Añadir", :class=>"btn btn-primary" %></div>
+		      </div>
+		    <%end%>
+		    </div>
+		  </div>
+		  </div>
+		 <%end%>
+      </div>
+    </div>
+   </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+$('.close').click(function(){
+  $(this).parents('li').remove();
+})
+</script>
+
+
+
+
