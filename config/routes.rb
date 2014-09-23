@@ -1,15 +1,22 @@
 Felcv::Application.routes.draw do
 
-
-
   #index
   get "welcome/index"
 
   #users
-  devise_for :users,:controllers => { :registrations =>'registration'}
+  devise_for :users,:controllers => { :registrations =>'users'}
+
+  get 'users/sign_up' => 'users#new', :as => 'new_user'
+  post 'users/create' => 'users#create', :as => 'create_user'
+  get 'users/index/:id' => 'users#index', :as => 'users' 
+  get 'users/view/:id' => 'users#show', :as => 'user' 
+  post 'users/edit_status' => 'users#edit_status', :as => 'edit_user_status' 
+  get 'users/edit' => 'users#edit', :as => 'edit_user' 
+  post 'users/update' => 'users#update', :as => 'update_user' 
   
   #cases
   get 'cases/index' => 'cases#index', :as => 'cases'
+  get 'cases/index_mine' => 'cases#index_mine', :as => 'cases_mine'
   get 'cases/view/:id' => 'cases#show', :as => 'case'
   get 'cases/new' => 'cases#new', :as => 'new_case'
   post 'cases/create' => 'cases#create', :as => 'create_case'
@@ -35,13 +42,14 @@ Felcv::Application.routes.draw do
   post 'direct_actions/update' => 'direct_actions#update', :as => 'update_direct_action'
   get 'direct_actions/key_pass/:id' => 'direct_actions#key_pass', :as => 'key_pass_direct_action'
   get 'direct_actions/sign/:id' => 'direct_actions#sign', :as => 'sign_direct_action'
-  get 'direct_actions/create_item/:id' => 'direct_actions#create_item', :as => 'create_item'
-  get 'direct_actions/edit_item/:id_direct_action' => 'direct_actions#edit_item', :as => 'edit_item'
-  get 'direct_actions/destroy_item/:id_direct_action' => 'direct_actions#destroy_item', :as => 'destroy_item'
+  get 'direct_actions/create_item' => 'direct_actions#create_item', :as => 'create_item'
+  get 'direct_actions/edit_item' => 'direct_actions#edit_item', :as => 'edit_item'
+  get 'direct_actions/destroy_item/:id_item' => 'direct_actions#destroy_item', :as => 'destroy_item'
   post 'direct_action/save' => 'direct_actions#save_direct_action', :as => 'save_direct_action'
+  
 
   #people
-  get 'people/index' => 'people#index', :as => 'people'
+  get 'people/index/:id' => 'people#index', :as => 'people'
   get 'people/view/:id' => 'people#show', :as => 'person'
   get 'people/new/:case_id' => 'people#new', :as => 'new_person'
   post 'people/create' => 'people#create', :as => 'create_person'
@@ -63,7 +71,22 @@ Felcv::Application.routes.draw do
   get 'interviews/edit_question/:id' => 'interviews#edit_question', :as => 'edit_question'
   get 'interviews/sign/:id' => 'interviews#sign', :as => 'sign_interview'
   get 'interviews/key_pass/:id' => 'interviews#key_pass', :as => 'key_pass_interview'
-  
+
+  #conclusions
+  get 'conclusions/view/:id' => 'conclusions#show', :as => 'conclusion'
+  get 'conclusions/new/:case_id' => 'conclusions#new', :as => 'new_conclusion'
+  post 'conclusions/create' => 'conclusions#create', :as => 'create_conclusion'
+  get 'conclusions/edit/:id' => 'conclusions#edit', :as => 'edit_conclusion'
+  post 'conclusions/update/:id' => 'conclusions#update', :as => 'update_conclusion'
+
+  #stations
+  get 'stations/index' => 'stations#index', :as => 'stations'
+  get 'stations/view/:id' => 'stations#show', :as => 'station'
+  get 'stations/new' => 'stations#new', :as => 'new_station'
+  post 'stations/create' => 'stations#create', :as => 'create_station'
+  get 'stations/edit/:id' => 'stations#edit', :as => 'edit_station'
+  post 'stations/update' => 'stations#update', :as => 'update_station'
+  get 'stations/destroy/:id' => 'stations#destroy', :as => 'destroy_station'
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140907201533) do
+ActiveRecord::Schema.define(version: 20140916201118) do
 
   create_table "cases", force: true do |t|
     t.string   "code"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 20140907201533) do
   end
 
   add_index "complaints", ["case_id"], name: "index_complaints_on_case_id"
+
+  create_table "conclusions", force: true do |t|
+    t.string   "antecedents"
+    t.string   "direct_action"
+    t.string   "police_actions"
+    t.string   "request"
+    t.integer  "case_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "conclusions", ["case_id"], name: "index_conclusions_on_case_id"
 
   create_table "direct_actions", force: true do |t|
     t.string   "police_name"
@@ -159,6 +171,14 @@ ActiveRecord::Schema.define(version: 20140907201533) do
     t.string "name"
   end
 
+  create_table "stations", force: true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_statuses", force: true do |t|
     t.string   "text"
     t.datetime "created_at"
@@ -176,6 +196,7 @@ ActiveRecord::Schema.define(version: 20140907201533) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "station_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
@@ -191,9 +212,11 @@ ActiveRecord::Schema.define(version: 20140907201533) do
     t.string   "birthdate"
     t.string   "last_work"
     t.string   "status"
+    t.string   "turn"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["station_id"], name: "index_users_on_station_id"
 
 end

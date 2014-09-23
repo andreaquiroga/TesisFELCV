@@ -11,4 +11,5 @@ civil = CivilStatus.create([{name: "Soltero"}, {name: "Casado"}, {name: "Divorci
 gender = Gender.create([{text: "Femenino"}, {text: "Masculino"}])
 person_role = PersonRole.create([{text: "Victima"}, {text: "Agresor"}, {text: "Denunciante"}, {text: "Testigo"}])
 user_status = UserStatus.create([{text: "Activo"}, {text: "Inactivo"}, {text: "Vacaciones"}, {text: "Baja medica"}])
-#admin = User.new(email: "admin@gmail.com", password: "administrador", password_confirmation:"administrador", role: roles.first, ci: 00000, name: "admin", paternal_name: "admin", maternal_name: "admin", grade: "CORONEL", )
+admin = User.new(email: "admin@gmail.com", password: "administrador", password_confirmation:"administrador", role: roles.first, ci: 00000, name: "admin", paternal_last_name: "admin", maternal_last_name: "admin", grade: "CORONEL", phone: "4000000", mobile: "7000000")
+admin.save!(:validate => false)

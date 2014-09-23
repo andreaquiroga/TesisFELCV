@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-lg-1">
+  </div>
+  <div class="col-lg-11">
+  <div class="jumbotron">
+   <%= image_tag("police.jpg", :height=>"90", :width=>"80", :align=>"left") %><%= image_tag("bpaf.png", :height=>"90", :width=>"80", :align=>"right") %><br/><center><h2>FUNCIONARIOS <%= @station.name%></h2></center><br/><br/>
+  <div class="row">
+  <div class="col-lg-3">
+  </div>
+  <div class="col-lg-6">
+    <div class="list-group">
+    <% @users.each do |user| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title"><a href="<%=user_path(user.id)%>"><%= user.grade %>&nbsp;<%= user.name %>&nbsp;<%= user.paternal_last_name %></a></div>
+        </div>
+        <div class="panel-body">
+            <medium style="color: gray;"><span class="glyphicon glyphicon-envelope" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<%= user.email %>
+            </medium><br/>
+            <medium style="color: gray;"><span class="glyphicon glyphicon-phone" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<%= user.mobile %>
+            </medium><br/>
+            <medium style="color: gray;"><span class="glyphicon glyphicon-phone-alt" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp; <%= user.phone %>
+            </medium><br/>
+            <medium style="color: gray;"><span class="glyphicon glyphicon-user" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<%= user.role %>
+            </medium>
+        </div>
+      </div>
+      <div>
+        &nbsp;
+      </div>      
+    <% end %>
+    </div>
+    
+    </div>
+    </div>
+  </div>
+  </div>
+</div>

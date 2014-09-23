@@ -8,6 +8,7 @@
       <div class="col-lg-1">  
       </div>
       <div class="col-lg-10">
+        <%= render :partial => 'layouts/case_facts' %>
         <center><h3>REGISTRAR DENUNCIA</h3></center>
         <%= form_for @complaint , :url => { :action => :create }, :method=>'post'  do |r| %>
           <% if @complaint.errors.any? %>

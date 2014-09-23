@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-lg-2">
+    <%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+      	<%= render :partial => 'layouts/case_facts' %>
+        <center><h2>INFORME POLICIAL</h2></center><br/><br/>
+        <%= form_for @conclusion , :url => { :action => :create }, :method=>'post'  do |d| %>
+          <% if @conclusion.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@conclusion.errors.count, "errorre") %> encontrados:</h2>
+                <ul>
+                <% @conclusion.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= d.hidden_field  :id %>
+          <%= d.hidden_field  :case_id %>
+          <u><label>ANTECEDENTES.</label></u>
+          <%= d.text_area :antecedents, :class=>'form-control' %>
+          <% if @case.direct_action!=nil%>
+          	<u><label>ACCION DIRECTA.</label></u>
+          	<%= d.text_area :direct_action, :class=>'form-control' %>
+          <% end %>
+          <u><label>ACTUACIONES POLICIALES.</label></u>
+          <%= d.text_area :police_actions, :class=>'form-control' %>
+          <u><label>PETITORIO.</label></u>
+          <%= d.text_area :request, :class=>'form-control' %>
+          <div><%= d.submit "Guardar", :class=>"btn btn-primary" %></div><br/><br/>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

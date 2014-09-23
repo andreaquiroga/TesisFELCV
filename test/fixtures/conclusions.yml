@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  antecedents: MyString
+  direct_action: MyString
+  police_actions: MyString
+  request: MyString
+
+two:
+  antecedents: MyString
+  direct_action: MyString
+  police_actions: MyString
+  request: MyString

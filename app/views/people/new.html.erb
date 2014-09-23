@@ -8,6 +8,7 @@
       <div class="col-lg-1">  
       </div>
       <div class="col-lg-10">
+      <%= render :partial => 'layouts/case_facts' %>
         <center><h3>REGISTRAR DATOS PERSONA INVOLUCRADA</h3></center>
         <%= form_for @person , :url => { :action => :create }, :method=>'post' do |f| %>
           <% if @person.errors.any? %>

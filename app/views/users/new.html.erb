@@ -1,0 +1,59 @@
+<div class="col-lg-1"></div>
+<div class="col-lg-11">
+<div class="jumbotron">
+	<center><h2>REGISTRARSE</h2></center><br/>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |o| %>
+  	<%= devise_error_messages! %>
+  	<div class="row">
+	  <div class="form-group">
+	  	  <div class="col-lg-1">
+	  	  </div>
+	  	  <div class="col-lg-10">
+	  	  	  <label>Unidad:</label>
+	          <%=o.collection_select(:station_id, Station.all, :id, :name, {prompt: "-Seleccionar una unidad-"}, {class:"form-control"})%><br/>
+	  	  	  <label>CI:</label>
+	          <%= o.text_field :ci, :class=>'form-control' %>
+	          <label>Nombre:</label>
+	          <%= o.text_field :name, :class=>'form-control' %>
+	          <label>Apellido Paterno:</label>
+	          <%= o.text_field :paternal_last_name, :class=>'form-control' %>
+	          <label>Apellido Materno:</label>
+	          <%= o.text_field :maternal_last_name, :class=>'form-control' %>
+	          <label>Fecha Nacimiento:</label>
+	          <%= o.text_field :birthdate, 'data-behaviour' => 'datepicker', :class=>'form-control'%>
+	          <label>Grado:</label>
+	          <%=o.collection_select(:grade, Grade.all, :name, :name, {prompt: "-Seleccionar un grado-"}, {class:"form-control"})%><br/>
+	          <label>Direccion:</label>
+	          <%= o.text_field :address, :class=>'form-control' %>
+	          <label>Ultimo Destino:</label>
+	          <%= o.text_field :last_work, :class=>'form-control' %>
+	          <label>Telefono:</label>
+	          <%= o.text_field :phone, :class=>'form-control' %>
+	          <label>Celular:</label>
+	          <%= o.text_field :mobile, :class=>'form-control' %>
+	          <label>Ingreso a la Institucion:</label>
+	          <%= o.text_field :admission_date, 'data-behaviour' => 'datepicker', :class=>'form-control' %>        
+              <label>Email:</label>
+		  	  <%= o.email_field :email, :class=>"form-control"  %>
+		      <!--<label>Contrasenia:</label>-->
+	    	  <%= o.hidden_field :password, autocomplete: "off", :class=>"form-control" %>
+	    	  <%= o.hidden_field :password_confirmation, autocomplete: "off", :class=>"form-control" %>
+	    	  <%= o.hidden_field :status, :class=>'form-control' %>
+		      <label>Rol de usuario:</label>
+	    	  <%=o.collection_select :role, Role.all, :name, :name, {prompt: "-Seleccionar un rol-"}, {class:"form-control"} %><br/>
+	          <div><%= o.submit "Guardar", :class=>"btn btn-primary" %></div><br/>
+	          
+    	  </div>
+
+	  	  <div class="col-lg-1">
+	  	  </div>  
+      </div>
+      </div>      
+    <% end %>
+</div>
+
+    <script type="text/javascript">
+  		$(document).ready(function(){
+    	$('[data-behaviour~=datepicker]').datepicker();
+  		})
+	</script>

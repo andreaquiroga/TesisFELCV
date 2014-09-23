@@ -36,6 +36,10 @@ gem 'devise'
 
 gem 'bootstrap-datepicker-rails'
 
+gem 'gmaps4rails'
+
+gem 'thin'
+
 gem 'pg', group: [:production]
 
 

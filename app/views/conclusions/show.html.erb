@@ -1,0 +1,36 @@
+
+<div class="row">
+  <div class="col-lg-2">
+    <%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+       <%= render :partial => 'layouts/case_facts' %>
+        <center><h2>INFORME POLICIAL</h2></center><br/><br/>
+		<h5>
+		  <strong>ANTECEDENTES:</strong><br/>
+		  <%= @conclusion.antecedents %>
+		</h5>
+		<h5>
+		  <strong>ACCION DIRECTA:</strong><br/>
+		  <%= @conclusion.direct_action %>
+		</h5>
+		<h5>
+		  <strong>ACTUACIONES POLICIALES</strong><br/>
+		  <%= @conclusion.police_actions %>
+		</h5>
+		<h5>
+		  <strong>PETITORIO:</strong><br/>
+		  <%= @conclusion.request %>
+		</h5><br/><br/>
+		<%= link_to 'Editar', edit_conclusion_path(@conclusion) %>
+	  </div>
+	</div>
+  </div>
+  </div>
+</div>
+

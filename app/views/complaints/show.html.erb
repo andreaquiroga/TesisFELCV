@@ -8,6 +8,7 @@
       <div class="col-lg-1">  
       </div>
       <div class="col-lg-10">
+      	<%=render :partial => 'layouts/case_facts'%>
 		<center><h3>DENUNCIA</h3></center><br/>
 		<h5>
 		  <strong>Fecha:</strong>
@@ -33,7 +34,7 @@
 		  <strong>Relacion Cincunstancial:</strong>
 		  <%= @complaint.cincunstancial_relation %>
 		</h5>
-		<%= link_to 'Edit', edit_complaint_path(@complaint.id) %>
+		<%= link_to 'Editar', edit_complaint_path(@complaint.id) %>
 	  </div>
 	</div>
    </div>

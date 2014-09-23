@@ -44,8 +44,9 @@ class User < ActiveRecord::Base
   validates :status,
     :presence => { :message => " es requerido"}
   :remember_me
+  :turn
   
-
+  belongs_to :station
   def role?(r)
     role.include? r.to_s
   end

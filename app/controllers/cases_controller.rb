@@ -4,7 +4,11 @@ class CasesController < ApplicationController
   #simple search
   def simple_search
     @cases = Case.search(params[:code])
-    
+    if params[:mine]=="true"
+      @mine=true
+    else
+      @mine=false
+    end
   end
 
   def advanced_search
@@ -12,19 +16,29 @@ class CasesController < ApplicationController
     @cases2= Case.advanced_search_researcher(params[:researcher])
     @cases3= Case.advanced_search_person(params[:name])
     @cases=(@cases1&@cases2&@cases3).uniq
+    if params[:mine]=="true"
+      @mine=true
+    else
+      @mine=false
+    end
   end
 
   # GET /cases
   # GET /cases.json
   def index
+    @mine=false
     @cases = Case.all
+  end
+
+  def index_mine
+    @mine=true
+    @cases = Case.where(:user_id=>current_user.id)
   end
 
   # GET /cases/1
   # GET /cases/1.json
   def show
     @case=Case.find(params[:id])
-    #@complaint=Complaint.where(:case_id=>params[:id]).first
     @complaint=Complaint.new
     @person=Person.new
     @link=Link.new
@@ -34,10 +48,13 @@ class CasesController < ApplicationController
   # GET /cases/new
   def new
     @case = Case.new
-    @case.user_id = current_user.id
     @case.init_date = Date.today
     @case.code="felcv"
+    @user=User.where('status = ? ', "Activo").order("turn ASC").first
+    @case.user_id=@user.id
     @case.save
+    @user.turn = (User.maximum("turn").to_i + 1).to_s
+    @user.save(:validate => false)    
     @case_complete = Case.find(@case.id)
     @case_complete.code = "felcv-"+@case.id.to_s+"-cbba"
     if @case_complete.save

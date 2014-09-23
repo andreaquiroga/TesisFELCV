@@ -33,12 +33,12 @@ class DirectActionsController < ApplicationController
   # POST /direct_actions.json
   def create
     @direct_action = DirectAction.new(direct_action_params)
-    respond_to do |format|
+    respond_to do |format| 
       if @direct_action.save
         @item = Item.new(item_params)
         @item.direct_action_id = @direct_action.id
         if @item.save
-          format.html { redirect_to edit_direct_action_path(@direct_action.id), notice: 'Primer registro' }
+          format.html { redirect_to edit_direct_action_path(@direct_action.id), notice: '' }
           format.json { render action: 'show', status: :created, location: @direct_action }
         end
       else
@@ -61,21 +61,27 @@ class DirectActionsController < ApplicationController
   # PATCH/PUT /direct_actions/1.json
   def update
     @direct_action = DirectAction.find(params[:direct_action][:id])
+    @case = Case.find(@direct_action.case_id)
     respond_to do |format|
       if @direct_action.update(direct_action_params)
         if params[:add]
           @item = Item.new(item_params)
           @item.direct_action_id = @direct_action.id
           if @item.save
-            format.html { redirect_to edit_direct_action_path(@direct_action.id), notice: 'Primer registro' }
+            format.html { redirect_to edit_direct_action_path(@direct_action.id), notice: '' }
             format.json { render action: 'show', status: :created, location: @direct_action }
           else
             format.html { render action: 'edit' }
             format.json { render json: @direct_action.errors, status: :unprocessable_entity }
           end
         else
-          format.html { redirect_to direct_action_path(@direct_action.id), notice: 'Editado' }
-          format.json { render action: 'show', status: :created, location: @direct_action }
+          if params[:edit]
+            format.html { redirect_to edit_direct_action_path(@direct_action.id), notice: '' }
+            format.json { render action: 'show', status: :created, location: @direct_action }
+          else
+            format.html { redirect_to direct_action_path(@direct_action.id), notice: 'Editado' }
+            format.json { render action: 'show', status: :created, location: @direct_action }
+          end
           
         end 
       end
@@ -86,7 +92,7 @@ class DirectActionsController < ApplicationController
     @direct_action = DirectAction.find(params[:id])
     respond_to do |format|
       if @direct_action.update(direct_action_params)
-          format.html { redirect_to direct_action_path(@direct_action.id), notice: 'registro' }
+          format.html { redirect_to direct_action_path(@direct_action.id), notice: '' }
           format.json { render action: 'show', status: :created, location: @direct_action }
       else
           format.html { render action: 'edit' }
@@ -107,6 +113,13 @@ class DirectActionsController < ApplicationController
   end
 
   def destroy_item
+    @item = Item.find(params[:id_item])
+    @direct_action = DirectAction.find(@item.direct_action_id)
+    @item.destroy
+    respond_to do |format|
+      format.html { redirect_to edit_direct_action_path(@direct_action.id), notice: 'objeto eliminado' }
+      format.json { head :no_content }
+    end
   end
 
   def edit_item

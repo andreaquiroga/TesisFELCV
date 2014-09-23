@@ -8,6 +8,7 @@
       <div class="col-lg-1">  
       </div>
       <div class="col-lg-10">
+      <%= render :partial => 'layouts/case_facts' %>
         <center><h3>REGISTRAR CUESTIONARIO</h3></center>
         <%= form_for @interview, :url => { :action => :create }, :method=>'post' do |f| %>
   		  <% if @interview.errors.any? %>

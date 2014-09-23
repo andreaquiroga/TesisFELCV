@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-1">
+  </div>
+  <div class="col-lg-11">
+	<div class="jumbotron">
+		<center><h2>REGISTRAR UNIDAD</h2></center><br/>
+		<%= form_for @station , :url => { :action => :create }, :method=>'post'  do |s| %>
+	  	      <% if @station.errors.any? %>
+	            <div id="error_explanation">
+	              <h2><%= pluralize(@station.errors.count, "errorre") %> encontrados:</h2>
+	                <ul>
+	                <% @station.errors.full_messages.each do |msg| %>
+	                  <li><%= msg %></li>
+	                <% end %>
+	              </ul>
+	            </div>
+	          <% end %>
+	  	  <div class="row">
+			  <div class="form-group">
+			  	  <div class="col-lg-1">
+			  	  </div>
+			  	  <div class="col-lg-10">
+			  	  	  <label>Nombre:</label>
+			  	  	  <%= s.text_field :name, :class=>'form-control' %>
+			  	  	  <label>Telefono:</label>
+			  	  	  <%= s.text_field :phone, :class=>'form-control' %><br/>	
+			  	  	  <div><%= s.submit "Guardar", :class=>"btn btn-primary" %></div><br/><br/>			        
+				  </div>
+				</div>
+			</div>
+		<%end%>
+	</div>
+  </div>

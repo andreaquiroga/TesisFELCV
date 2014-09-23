@@ -29,7 +29,7 @@ class ComplaintsController < ApplicationController
   # POST /complaints.json
   def create
     @complaint = Complaint.new(complaint_params)
-
+    #@case = Case.find(@complaint.case_id)
     respond_to do |format|
       if @complaint.save
         format.html { redirect_to complaint_path(@complaint.id), notice: 'Denuncia creada.' }

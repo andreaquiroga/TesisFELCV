@@ -8,7 +8,9 @@
       <div class="col-lg-1">  
       </div>
       <div class="col-lg-10">
+        <%=render :partial => 'layouts/case_facts'%>
         <center><h3>EDITAR DENUNCIA</h3></center>
+
         <%= form_for @complaint , :url => { :action => :update }, :method=>'post'  do |r| %>
           <% if @complaint.errors.any? %>
             <div id="error_explanation">

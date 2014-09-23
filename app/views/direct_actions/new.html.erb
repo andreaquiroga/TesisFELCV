@@ -8,7 +8,8 @@
       <div class="col-lg-1">  
       </div>
       <div class="col-lg-10">
-        <center><h2>REGISTRAR ACCION DIRECTA</h2></center><br/><br/>
+        <%= render :partial => 'layouts/case_facts' %>
+        <center><h2>FORMULARIO DE ACCION DIRECTA</h2></center><br/><br/>
         <%= form_for @direct_action , :url => { :action => :create }, :method=>'post'  do |d| %>
           <% if @direct_action.errors.any? %>
             <div id="error_explanation">
@@ -48,8 +49,8 @@
           <%= d.text_field :nature, :class=>'form-control' %>
           <label>Relato del hecho: </label>
           <%= d.text_area :cincunstancial_relation, :class=>'form-control' %><br/>
-          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Objeto</a>
-        <%= render 'new_item' %>
+          <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Objeto</a>
+          <%= render 'new_item' %><br/><br/>
           <div><%= d.submit "Guardar", :class=>"btn btn-primary" %></div><br/><br/>
         <% end %>
       </div>

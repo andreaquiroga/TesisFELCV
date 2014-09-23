@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-lg-1">
+  </div>
+  <div class="col-lg-11">
+	<div class="jumbotron">
+	<div class="row">
+	  <div class="col-lg-1">
+	  </div>
+	  <div class="col-lg-10">
+		<center><h2>UNIDAD</h2></center><br/>
+		  <h4><strong>Nombre:</strong>
+		  <%= @station.name %><br/>
+		  <strong>Telefono:</strong>
+		  <%= @station.phone %></h4>
+	  </div>
+	</div>
+		
+	</div>
+  </div>
+</div>
+
+<%= link_to 'Editar', edit_station_path(@station) %> |

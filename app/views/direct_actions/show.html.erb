@@ -8,13 +8,35 @@
       <div class="col-lg-1">  
       </div>
       <div class="col-lg-10">
-      	<center><h3>ACCION DIRECTA</h3></center><br/>
+      	<%= render :partial => 'layouts/case_facts' %>
+      	<center><h3>FORMULARIO DE ACCION DIRECTA</h3></center><br/>
+      	<u><h4><strong>POLICIA INTERVINIENTE</strong></h4></u>
       	<h5>
 		  <strong>Nombre:</strong>
 		  <%= @direct_action.police_name %>
 		</h5>
 		<h5>
-		  <strong>Fecha:</strong>
+		  <strong>CI:</strong>
+		  <%= @direct_action.police_ci %>
+		</h5>
+		<h5>
+		  <strong>Telefono:</strong>
+		  <%= @direct_action.police_phone %>
+		</h5>
+		<h5>
+		  <strong>Unidad:</strong>
+		  <%= @direct_action.police_station %>
+		</h5>
+		<h5>
+		  <strong>Sigla:</strong>
+		  <%= @direct_action.station_acronym %>
+		</h5>
+		<h5>
+		  <strong>Zona Unidad:</strong>
+		  <%= @direct_action.station_zone %>
+		</h5><br/>
+		<u><h4><strong>DATOS DEL HECHO</strong></h4></u>
+		<h5><strong>Fecha:</strong>
 		  <%= @direct_action.fact_date %>
 		</h5>
 		<h5>
@@ -31,14 +53,26 @@
 		</h5>
 		<h5>
 		  <strong>Relato del Hecho:</strong>
-		  <%= @direct_action.cincunstancial_relation %>
-		</h5>
+		  <h5 align="justify"><%= @direct_action.cincunstancial_relation %></h5>
+		</h5><br/>
+		<u><h4><strong>OBJETOS</strong></h4></u>
+		<% if @direct_action.items!=nil %>
+          <ul class="list-group"> 
+	      <%@direct_action.items.each do |p|%>
+	    	<li class="list-group-item">
+  		    <h5>Nombre.- <%=p.name%></h5>
+  			<h5>Descripcion.- <%=p.description%></h5>
+  			<h5>Lugar.- <%=p.place%></h5>
+			</li>
+		  <%end%>
+		  </ul>
+		<% else %>
+		  <h5>No existen objetos registrados</h5>
+		<% end %>
       <br/><br/>
-      <%= link_to 'Edit', edit_direct_action_path(@direct_action) %>
+      <%= link_to 'Editar', edit_direct_action_path(@direct_action) %>
       </div>
     </div>
    </div>
   </div>
 </div>
-
-

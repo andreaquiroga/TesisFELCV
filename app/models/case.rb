@@ -12,6 +12,7 @@ class Case < ActiveRecord::Base
 	has_one :complaint
 	has_one :interview
 	has_one :direct_action
+	has_one :conclusion
 
 	def self.search(search)
 	  if search
@@ -33,7 +34,7 @@ class Case < ActiveRecord::Base
 	  if researcher.blank?
 		find(:all)
 	  else
-	  	find(:all, :joins => {:user=>:official},:conditions =>['name LIKE ?', "%#{researcher}%"])
+	  	find(:all, :joins => :user,:conditions =>['name LIKE ?', "%#{researcher}%"])
       end
 	end
 

@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-lg-1">
+  </div>
+  <div class="col-lg-11">
+  <div class="jumbotron">
+   <%= image_tag("police.jpg", :height=>"90", :width=>"80", :align=>"left") %><%= image_tag("bpaf.png", :height=>"90", :width=>"80", :align=>"right") %><br/><center><h2>UNIDADES </h2></center><br/><br/>
+  <div class="row">
+  <div class="col-lg-2">
+  </div>
+  <div class="col-lg-8">
+    <div class="list-group">
+    <% @stations.each do |station| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title"><%= station.name %></div>
+        </div>
+        <div class="panel-body">
+            <span class="glyphicon glyphicon-phone-alt" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<medium style="color: gray;"><%= station.phone %>
+            </medium>
+            <br/>
+             <a href=<%=station_path(station.id.to_s)%>>Ver</a>&nbsp;|&nbsp;
+             <a href=<%=users_path(station.id)%>>Ver Usuarios</a>
+        </div>
+      </div>
+      <div>
+        &nbsp;
+      </div>      
+    <% end %>
+    </div>
+    <button class="primary">
+        <%= link_to new_station_path do %>
+          <h4>&nbsp;<span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-home"></span>&nbsp;</h4>
+          <% end %>
+    </button>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>

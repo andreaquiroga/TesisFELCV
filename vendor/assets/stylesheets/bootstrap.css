@@ -1,4 +1,5 @@
 @import url("//fonts.googleapis.com/css?family=Lato:400,700,400italic");
+
 /*!
  * bootswatch v3.2.0
  * Homepage: http://bootswatch.com
@@ -50,6 +51,8 @@ a {
 a:active,
 a:hover {
   outline: 0;
+  color: #18bc9c;
+  background: transparent;
 }
 abbr[title] {
   border-bottom: 1px dotted;
@@ -259,8 +262,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -911,6 +914,7 @@ a:hover,
 a:focus {
   color: #18bc9c;
   text-decoration: underline;
+
 }
 a:focus {
   outline: thin dotted;
@@ -4519,7 +4523,7 @@ a.label:focus {
 }
 a.badge:hover,
 a.badge:focus {
-  color: #ffffff;
+  color: #18bc9c;
   text-decoration: none;
   cursor: pointer;
 }
@@ -4985,6 +4989,7 @@ a.list-group-item-danger.active:focus {
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
@@ -4997,6 +5002,12 @@ a.list-group-item-danger.active:focus {
 }
 .panel-title > a {
   color: inherit;
+}
+
+.panel-title > a:hover {
+  color: #18bc9c;
+  background: inherit;
+
 }
 .panel-footer {
   padding: 10px 15px;
@@ -5170,11 +5181,11 @@ a.list-group-item-danger.active:focus {
   border-bottom: 1px solid #ecf0f1;
 }
 .panel-default {
-  border-color: #ecf0f1;
+  border-color: #2c3e50;
 }
 .panel-default > .panel-heading {
-  color: #2c3e50;
-  background-color: #ecf0f1;
+  color: #ecf0f1;
+  background-color:  #ecf0f1;
   border-color: #ecf0f1;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
