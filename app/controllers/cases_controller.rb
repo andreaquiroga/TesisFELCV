@@ -42,7 +42,6 @@ class CasesController < ApplicationController
     @complaint=Complaint.new
     @person=Person.new
     @link=Link.new
-    
   end
 
   # GET /cases/new
@@ -50,15 +49,17 @@ class CasesController < ApplicationController
     @case = Case.new
     @case.init_date = Date.today
     @case.code="felcv"
-    @user=User.where('status = ? ', "Activo").order("turn ASC").first
+    @user=User.new
+    @user=User.where('status = ? and role = ?', "Activo", "investigador").order("turn ASC").first
     @case.user_id=@user.id
     @case.save
-    @user.turn = (User.maximum("turn").to_i + 1).to_s
+    @user.turn = User.maximum("turn") + 1
     @user.save(:validate => false)    
     @case_complete = Case.find(@case.id)
     @case_complete.code = "felcv-"+@case.id.to_s+"-cbba"
     if @case_complete.save
-      flash[:notice] = "Caso creado."
+      UserMailer.new_case_mailer(@case, @user).deliver
+      flash[:notice] = "Caso creado."+@user.name
       redirect_to case_path(@case.id)
     else
       flash[:notice] = "Error al crear el caso, contacte al administrador."

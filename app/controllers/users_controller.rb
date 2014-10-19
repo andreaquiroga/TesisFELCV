@@ -17,9 +17,9 @@ def create
 	end
 	@user.valid?
 	if @user.errors.blank?
-		if @user.save
+		if @user.save(:validate=>false)
 			flash[:notice] = "Usuario registrado."
-			redirect_to root_path
+			redirect_to user_path(@user.id)
 		end
 	else
 		render :action => "new"
@@ -35,14 +35,30 @@ def show
 	@user=User.find(params[:id])
 end
 
+def upload_cert
+	@user = User.find(params[:id])
+end
+
+def save_cert
+	@user = User.find(params[:user][:id])
+	@user.upload_cert = params[:user][:upload_cert]
+	respond_to do |format|
+	    if @user.save(:validate=>false)   
+	      format.html { redirect_to user_path(@user.id), notice: 'Certificado guardado' }
+        	format.json { render action: 'show', status: :created, location: @user }
+	    else                              
+	      format.html { render action: 'upload_cert' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+	    end
+		end
+end
+
 def edit_status
 	@user = User.find(params[:user][:id])
 	@user.status = params[:user][:status]
 	@user.save(:validate=>false)
 	redirect_to user_path(@user.id)
 end
-
-
 
 def edit
 	@user =  User.find(current_user.id)
@@ -72,14 +88,28 @@ def edit_password
 end
 
 def update_password
-    @user = User.find(current_user.id)
-    if @user.update(user_params_password)
-      # Sign in the user by passing validation in case his password changed
-      sign_in @user, :bypass => true
-      redirect_to root_path
-    else
-      render "edit"
-    end
+	@user = User.find(current_user.id)
+	if @user.valid_password?(params[:actual_password])
+		respond_to do |format|
+	    if @user.update(user_params_password)
+	      # Sign in the user by passing validation in case his password changed
+	      @user.status="Activo"
+	      @user.save(:validate => false)
+	      sign_in @user, :bypass => true
+
+	      
+	      format.html { redirect_to root_path, notice: 'Contrasenia modificada.' }
+        	format.json { render action: 'root', status: :created, location: @user }
+	    else                              
+	      format.html { render action: '_change_password' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+	    end
+		end
+	else
+		flash[:error]="Contrasenia actual incorrecta"
+		redirect_to root_path
+	end
+
   end
 
 def user_params_password
@@ -87,7 +117,7 @@ def user_params_password
 end
 
 def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :role, :ci, :name, :paternal_last_name, :maternal_last_name, :grade, :address, :phone, :mobile, :birthdate, :admission_date, :last_work, :status, :station_id, :turn)
+    params.require(:user).permit(:email, :password, :password_confirmation, :role, :ci, :name, :paternal_last_name, :maternal_last_name, :grade, :address, :phone, :mobile, :birthdate, :admission_date, :last_work, :status, :station_id, :turn)
 end
 
 end

@@ -4,6 +4,8 @@ Felcv::Application.routes.draw do
   get "welcome/index"
 
   #users
+  get '/download_pdf(.:format)' => 'users#index_pdf', :as=>'index_pdf'
+
   devise_for :users,:controllers => { :registrations =>'users'}
 
   get 'users/sign_up' => 'users#new', :as => 'new_user'
@@ -13,6 +15,10 @@ Felcv::Application.routes.draw do
   post 'users/edit_status' => 'users#edit_status', :as => 'edit_user_status' 
   get 'users/edit' => 'users#edit', :as => 'edit_user' 
   post 'users/update' => 'users#update', :as => 'update_user' 
+  get 'users/edit_password' => 'users#edit_password', :as => 'edit_password_user'  
+  post 'users/update_password' => 'users#update_password', :as => 'update_password' 
+  get 'users/upload_cert/:id' => 'users#upload_cert', :as => 'upload_cert'
+  post 'users/save_cert' => 'users#save_cert', :as => 'save_cert'
   
   #cases
   get 'cases/index' => 'cases#index', :as => 'cases'
@@ -31,8 +37,9 @@ Felcv::Application.routes.draw do
   post 'complaints/create' => 'complaints#create', :as => 'create_complaint'
   get 'complaints/edit/:id' => 'complaints#edit', :as => 'edit_complaint'
   post 'complaints/update' => 'complaints#update', :as => 'update_complaint'
-  get 'complaints/key_pass/:id' => 'complaints#key_pass', :as => 'key_pass'
-  get 'complaints/sign/:id' => 'complaints#sign', :as => 'sign_complaint'
+  get 'complaints/private_key/:id' => 'complaints#private_key', :as => 'private_key'
+  post 'complaints/sign_complaint' => 'complaints#sign_complaint', :as => 'sign_complaint'
+  
 
    #direct_actions
   get 'direct_actions/view/:id' => 'direct_actions#show', :as => 'direct_action'
@@ -53,7 +60,7 @@ Felcv::Application.routes.draw do
   get 'people/view/:id' => 'people#show', :as => 'person'
   get 'people/new/:case_id' => 'people#new', :as => 'new_person'
   post 'people/create' => 'people#create', :as => 'create_person'
-  get 'people/continue_new/:person_id' => 'people#continue_new', :as => 'continue_new_person'
+  get 'people/continue_new/:link_id' => 'people#continue_new', :as => 'continue_new'
   post 'people/continue_create' => 'people#continue_create', :as => 'continue_create_person'
   get 'people/edit/:id' => 'people#edit', :as => 'edit_person'
   post 'people/update' => 'people#update', :as => 'update_person'
@@ -87,6 +94,12 @@ Felcv::Application.routes.draw do
   get 'stations/edit/:id' => 'stations#edit', :as => 'edit_station'
   post 'stations/update' => 'stations#update', :as => 'update_station'
   get 'stations/destroy/:id' => 'stations#destroy', :as => 'destroy_station'
+
+  #reports
+  get 'reports/new' => 'reports#new', :as => 'new_report'
+  post 'reports/create' => 'reports#create', :as => 'create_report'
+  get 'reports/second' => 'reports#second', :as => 'second_report'
+  get  'reports/third' => 'reports#third', :as => 'third_report'
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

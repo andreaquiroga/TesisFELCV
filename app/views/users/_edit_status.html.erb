@@ -8,7 +8,7 @@
 		      </div>
 		      <div class="modal-body">
 		       <%= i.hidden_field  :id %>
-		       <%=i.collection_select(:status, UserStatus.all, :text, :text, {prompt: "-Seleccionar una unidad-"}, {class:"form-control"})%><br/>
+		       <%=i.collection_select(:status, UserStatus.all, :text, :text, {prompt: "-Seleccionar un estado-"}, {class:"form-control"})%><br/>
 		      </div>
 		      <div class="modal-footer">
 		        <div><%= i.submit "Guardar", :name=>'add', :class=>"btn btn-primary" %></div>

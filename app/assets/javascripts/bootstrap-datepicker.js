@@ -458,13 +458,13 @@
 								'</table>'+
 							'</div>'+
 							'<div class="datepicker-months">'+
-								'<table class="table-condensed">'+
+								'<table style="width:200px; height:180px">'+
 									DPGlobal.headTemplate+
 									DPGlobal.contTemplate+
 								'</table>'+
 							'</div>'+
 							'<div class="datepicker-years">'+
-								'<table class="table-condensed">'+
+								'<table style="width:200px; height:180px">'+
 									DPGlobal.headTemplate+
 									DPGlobal.contTemplate+
 								'</table>'+

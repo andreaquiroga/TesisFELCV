@@ -1,0 +1,27 @@
+es:
+   activerecord:
+    attributes:
+      user:
+        ci: "CI"
+        name: "Nombre"
+        paternal_last_name: "Apellido Paterno"
+        maternal_last_name: "Apellido Materno"
+        grade: "Grado"
+        address: "Direccion"
+        phone: "Telefono"
+        mobile: "Celular"
+        admission_date: "Fecha de ingreso a la institucion"
+        birthdate: "Cumpleaños"
+        last_work: "Destino Anterior"
+        email: "Correo Electronico"
+        password: "Contrasenia"
+        role: "Rol"
+      case:
+        code: "Codigo"
+        init_date: "Fecha de inicio"
+        end_date: "Fecha conclusion"
+      station:
+        code: "Codigo"
+        address: "Direccion"
+      person:
+        ci: "CI"

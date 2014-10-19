@@ -1,1 +1,7 @@
-
+<%if user_signed_in?%>
+	<% if current_user.signed_first? && current_user.status?("Inactivo") %>
+	 <%=render :partial => 'users/change_password'%>
+	<% else %>
+	 <%= render :partial => 'cases/all_cases'%> 
+	<%end%>
+<%end%>

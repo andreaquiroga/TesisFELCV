@@ -8,6 +8,7 @@
 }
 .navbar .nav > li a {
     padding: 10px 0 10px 20px;
+
 }
 .navbar ul.sub-level {
     display: none;
@@ -20,6 +21,7 @@
 }
 .span2 .nav >li a {
     width: 120px;
+    color: "grey";
 }
 .span3 .nav >li a {
     width: 200px;

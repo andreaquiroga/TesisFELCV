@@ -40,11 +40,21 @@ gem 'gmaps4rails'
 
 gem 'thin'
 
+gem 'paperclip'
+
+gem 'paperclip-dropbox'
+
 gem 'pg', group: [:production]
 
+gem 'wicked_pdf'
 
+gem 'wkhtmltopdf-binary'
 
+gem 'gchartrb'
 
+gem 'prawn'
+
+gem 'origami'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

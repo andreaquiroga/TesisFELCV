@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916201118) do
+ActiveRecord::Schema.define(version: 20141016033052) do
 
   create_table "cases", force: true do |t|
     t.string   "code"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140916201118) do
     t.integer  "case_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sign"
   end
 
   add_index "complaints", ["case_id"], name: "index_complaints_on_case_id"
@@ -124,7 +125,6 @@ ActiveRecord::Schema.define(version: 20140916201118) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
-    t.integer  "number"
     t.string   "place"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -167,6 +167,23 @@ ActiveRecord::Schema.define(version: 20140916201118) do
 
   add_index "questions", ["interview_id"], name: "index_questions_on_interview_id"
 
+  create_table "reports", force: true do |t|
+    t.string   "name"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "results", force: true do |t|
+    t.string   "label"
+    t.decimal  "porcentage"
+    t.integer  "report_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "results", ["report_id"], name: "index_results_on_report_id"
+
   create_table "roles", force: true do |t|
     t.string "name"
   end
@@ -186,12 +203,12 @@ ActiveRecord::Schema.define(version: 20140916201118) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                    default: "", null: false
+    t.string   "encrypted_password",       default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",            default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -212,7 +229,11 @@ ActiveRecord::Schema.define(version: 20140916201118) do
     t.string   "birthdate"
     t.string   "last_work"
     t.string   "status"
-    t.string   "turn"
+    t.integer  "turn"
+    t.string   "upload_cert_file_name"
+    t.string   "upload_cert_content_type"
+    t.integer  "upload_cert_file_size"
+    t.datetime "upload_cert_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

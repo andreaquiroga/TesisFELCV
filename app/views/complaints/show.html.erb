@@ -9,32 +9,47 @@
       </div>
       <div class="col-lg-10">
       	<%=render :partial => 'layouts/case_facts'%>
-		<center><h3>DENUNCIA</h3></center><br/>
-		<h5>
-		  <strong>Fecha:</strong>
-		  <%= @complaint.fact_date %>
-		</h5>
-		<h5>
-		  <strong>Hora:</strong>
-		  <%= @complaint.fact_time %>
-		</h5>
-		<h5>
-		  <strong>Lugar:</strong>
-		  <%= @complaint.place %>
-		</h5>
-		<h5>
-		  <strong>Relacion Victima/Agresor:</strong>
-		  <%= @complaint.aggressor_relation %>
-		</h5>
-		<h5>
-		  <strong>Naturaleza:</strong>
-		  <%= @complaint.nature %>
-		</h5>
-		<h5>
-		  <strong>Relacion Cincunstancial:</strong>
-		  <%= @complaint.cincunstancial_relation %>
-		</h5>
-		<%= link_to 'Editar', edit_complaint_path(@complaint.id) %>
+		<br/><br/>
+		<%= image_tag("police.jpg", :height=>"80", :width=>"70", :align=>"left") %><%= image_tag("bpaf.png", :height=>"80", :width=>"70", :align=>"right") %><br/><center><h3>DENUNCIA</h3></center><br/><br/><br/>
+		
+		
+		  Fecha:
+		  <label><%= @complaint.fact_date %>
+		</label><br/>
+		
+		  Hora:
+		  <label><%= @complaint.fact_time %>
+		</label><br/>
+		
+		  Lugar:
+		  <label><%= @complaint.place %>
+		</label><br/>
+		
+		  Relacion Victima/Agresor:
+		  <label><%= @complaint.aggressor_relation %>
+		</label><br/>
+		
+		  Naturaleza:
+		  <label><%= @complaint.nature %>
+		</label><br/>
+		
+		  Relacion Cincunstancial:
+		  <label><%= @complaint.cincunstancial_relation %>
+		</label><br/>
+<%if @complaint.sign == nil %>
+<form class="navbar-form navbar-left" method="get" action=<%= edit_complaint_path(@complaint.id)%> >
+                <button type="submit" class="btn btn-primary">
+                  <span class="icon-edit icon-white" style="vertical-align:-1px;  margin-right:7px; "></span> 
+                  Editar
+                </button>
+</form>
+<form class="navbar-form navbar-left" method="get" action=<%= private_key_path(@complaint.case_id)%> >
+    <button type="submit" class="btn btn-primary">
+    <span class="icon-check icon-white" style="vertical-align:-1px;  margin-right:7px; "></span> 
+    Firmar Digitalmente
+  </button>
+</form>
+<%end%>
 	  </div>
 	</div>
    </div>

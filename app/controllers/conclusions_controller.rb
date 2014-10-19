@@ -29,7 +29,7 @@ class ConclusionsController < ApplicationController
   # POST /conclusions.json
   def create
     @conclusion = Conclusion.new(conclusion_params)
-
+    @case = Case.find(@conclusion.case_id)
     respond_to do |format|
       if @conclusion.save
         format.html { redirect_to @conclusion, notice: 'Se almaceno la conclusion correctamente.' }

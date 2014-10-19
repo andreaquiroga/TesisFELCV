@@ -3,15 +3,35 @@
   </div>
   <div class="col-lg-11">
 	  <div class="jumbotron">
-	    <center><h2><%=@user.grade%>&nbsp;<%=@user.name%>&nbsp;<%=@user.paternal_last_name%>&nbsp;<%=@user.maternal_last_name%></h2></center><br/>
+	    <center><h2><%=@user.grade%>&nbsp;<%=@user.name%>&nbsp;<%=@user.paternal_last_name%>&nbsp;<%=@user.maternal_last_name%></h2></center><br/><br/>
 		<div class="row">
+	      <div class="col-lg-2">
+	      </div>
 		  <div class="col-lg-4">
-
+		 	<b><label>CI:</label></b>
+  			<h5><%= @user.ci  %></h5>
+		  	<b><label>Fecha de nacimiento:</label></b>
+  			<h5><%= @user.birthdate  %></h5>
+  			<b><label>Email:</label></b>
+  			<h5><%= @user.email  %></h5>
+  			<b><label>Direccion:</label></b>
+  			<h5><%= @user.address  %></h5>
+  		  <% if current_user.role?("1") %>
+  			<br/><br/><a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicModal">Editar estado</a>
+          <%= render 'edit_status' %><br/>
+          <% end %>
 		  </div>
 		  <div class="col-lg-4">
+		    <b><label>Telefono:</label></b>
+  			<h5><%= @user.phone  %></h5>
+  			<b><label>Celular:</label></b>
+  			<h5><%= @user.mobile  %></h5>
+  			<b><label>Fecha ingreso a la institucion:</label></b>
+  			<h5><%= @user.admission_date  %></h5>
+  			<b><label>Destino anterior:</label></b>
+  			<h5><%= @user.last_work  %></h5>
 		  </div>
-		  <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicModal">Editar estado</a>
-          <%= render 'edit_status' %><br/><br/>
+		  
 		</div>
 	  </div>
   </div>

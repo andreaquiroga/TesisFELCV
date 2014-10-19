@@ -1,0 +1,16 @@
+<div class="col-lg-1"></div>
+<div class="col-lg-11">
+	<div class="jumbotron">
+		<center><h2>CERTIFICADO DIGITAL</h2></center><br/>
+		<%= form_for @user, :html => { :multipart => true}, :url => {:action => :save_cert}, :method=>"post" do |u| %>
+			<% if (@user.upload_cert_file_name == nil) %>
+				<label>Certificado Digital:</label>
+				<%= u.hidden_field :id , :class =>"form-control"%>
+			    <%= u.file_field :upload_cert , :class=>"form-control" %><br/>
+			    <button type="button", class="btn btn-primary"><span class="glyphicon glyphicon-cloud-upload"></span><%= u.submit  "Subir", :class=>"btn btn-primary" %></button>
+			<% else %>
+			     <h3><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;<a href="<%=@user.upload_cert.url(download: true)%>"><%=@user.upload_cert_file_name[0,@user.upload_cert_file_name.rindex('.')]%></a></h3>
+			<% end %>
+		<% end %>
+	</div>
+</div>
