@@ -50,7 +50,7 @@ def save_cert
 	      format.html { render action: 'upload_cert' }
           format.json { render json: @user.errors, status: :unprocessable_entity }
 	    end
-		end
+	end
 end
 
 def edit_status

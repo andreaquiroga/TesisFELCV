@@ -73,8 +73,22 @@
 		      });
 
 		      </script><br/><br/>
+		      <h4><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;OTRAS DENUNCIAS CON LA PERSONA INVOLUCRADA</h4>
+              <div class="list-group">
+              <%if @links != nil%>
+                <% @links.each do |a| %>
+                  <%if a.case_id != @case.id %>
+                  <a href= class="list-group-item active">
+                    <h5 class="list-group-item-heading"><%= a.case.code %></h5></a>
+                    <b><h5 class="list-group-item-heading"><%= a.role %></h5></a></b>
+                  <%end%>    
+                <%end%>
+                <%else%>
+                <h6 class="list-group-item-heading">"No hay casos relacionados"</h6>
+               <%end%>
+               </div>
+<br/>
 		   <%= link_to 'Editar', edit_person_path(@link.id) %> |
-<%= link_to 'Personas Involucradas', people_path %> 
 		</div>
 		
 		</div>

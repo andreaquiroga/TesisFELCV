@@ -8,7 +8,7 @@ class StationsController < ApplicationController
   end
 
   # GET /stations/1
-  # GET /stations/1.json
+  # GET /stations/1.json 
   def show
     @station = Station.find(params[:id])
     @location=Location.find(@station.location_id)

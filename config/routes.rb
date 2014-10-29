@@ -39,6 +39,7 @@ Felcv::Application.routes.draw do
   post 'complaints/update' => 'complaints#update', :as => 'update_complaint'
   get 'complaints/private_key/:id' => 'complaints#private_key', :as => 'private_key'
   post 'complaints/sign_complaint' => 'complaints#sign_complaint', :as => 'sign_complaint'
+  post 'complaints/save_complaint_pdf' => 'complaints#save_complaint_pdf', :as => 'save_complaint_pdf'
   
 
    #direct_actions
@@ -65,6 +66,8 @@ Felcv::Application.routes.draw do
   get 'people/edit/:id' => 'people#edit', :as => 'edit_person'
   post 'people/update' => 'people#update', :as => 'update_person'
   get 'people/destroy/:id' => 'people#destroy', :as => 'destroy_person'
+  get 'people/person_exist/:id' => 'people#person_exist', :as => 'person_exist'
+  get 'people/location_exist/:id' => 'people#location_exist', :as => 'location_exist'
 
   #interview
   get 'interviews/view/:id' => 'interviews#show', :as => 'interview'

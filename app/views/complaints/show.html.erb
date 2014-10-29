@@ -10,45 +10,85 @@
       <div class="col-lg-10">
       	<%=render :partial => 'layouts/case_facts'%>
 		<br/><br/>
-		<%= image_tag("police.jpg", :height=>"80", :width=>"70", :align=>"left") %><%= image_tag("bpaf.png", :height=>"80", :width=>"70", :align=>"right") %><br/><center><h3>DENUNCIA</h3></center><br/><br/><br/>
-		
+		<%= image_tag("police.jpg", :height=>"80", :width=>"70", :align=>"left") %><%= image_tag("bpaf.png", :height=>"80", :width=>"70", :align=>"right") %><br/><center><h2>DENUNCIA</h2></center><br/><br/><br/>
 		
 		  Fecha:
 		  <label><%= @complaint.fact_date %>
 		</label><br/>
-		
 		  Hora:
-		  <label><%= @complaint.fact_time %>
+		  <label><%= @complaint.fact_time.strftime("%H:%M") %>
 		</label><br/>
-		
 		  Lugar:
 		  <label><%= @complaint.place %>
 		</label><br/>
-		
 		  Relacion Victima/Agresor:
 		  <label><%= @complaint.aggressor_relation %>
 		</label><br/>
-		
 		  Naturaleza:
 		  <label><%= @complaint.nature %>
 		</label><br/>
-		
 		  Relacion Cincunstancial:
 		  <label><%= @complaint.cincunstancial_relation %>
 		</label><br/>
+
+		<h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;PERSONAS INVOLUCRADAS</h4>
+              <%if @case.links != nil%>
+                <% @links.each do |link| %>
+			      <div class="panel panel-default">
+			        <div class="panel-heading">
+			            <div class="panel-title"><a href="<%=person_path(link.id)%>"><%= link.person.name %>&nbsp;<%= link.person.paternal_last_name %></a></div>
+			        </div>
+			        <div class="panel-body">
+			            <medium style="color: gray;"><span class="glyphicon glyphicon-gift" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<%= link.person.birthdate %>
+			            </medium><br/>
+			            <medium style="color: gray;"><span class="glyphicon glyphicon-phone" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<%= link.person.mobile %>
+			            </medium><br/>
+			            <medium style="color: gray;"><span class="glyphicon glyphicon-phone-alt" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp; <%= link.person.phone %>
+			            </medium><br/>
+			            <medium style="color: gray;"><span class="glyphicon glyphicon-user" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<%= link.role %>
+			            </medium>
+			        </div>
+			      </div>
+			      <div>
+			        &nbsp;
+			      </div>      
+			    <% end %>
+                <%else%>
+                <h6 class="list-group-item-heading">"No hay personas involucradas registradas"</h6>
+                <%end%>
+
+
+
+              <h4><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;CASOS RELACIONADOS</h4><br/>
+              <div class="list-group">
+              <%if @cases != nil%>
+                <% @cases.each do |a| %>
+                  <a href=<%=case_path(a.id)%> class="list-group-item active">
+                    <h5 class="list-group-item-heading"><%= a.code %></h5></a>
+                    
+                    <%end%>
+                <%else%>
+                <h6 class="list-group-item-heading">"No hay casos relacionados"</h6>
+                
+               <%end%>
+               </div>
+
+<br/>
 <%if @complaint.sign == nil %>
 <form class="navbar-form navbar-left" method="get" action=<%= edit_complaint_path(@complaint.id)%> >
                 <button type="submit" class="btn btn-primary">
-                  <span class="icon-edit icon-white" style="vertical-align:-1px;  margin-right:7px; "></span> 
+                  <span class="glyphicon glyphicon-edit" style="vertical-align:-1px;  margin-right:7px; "></span> 
                   Editar
                 </button>
 </form>
 <form class="navbar-form navbar-left" method="get" action=<%= private_key_path(@complaint.case_id)%> >
     <button type="submit" class="btn btn-primary">
-    <span class="icon-check icon-white" style="vertical-align:-1px;  margin-right:7px; "></span> 
+    <span class="glyphicon glyphicon-barcode" style="vertical-align:-1px;  margin-right:7px; "></span> 
     Firmar Digitalmente
   </button>
 </form>
+<%else%>
+<h4><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;<a href="<%=@complaint.complaint_signed.url(download: true)%>">Descargar Denuncia Firmada</a></h4>
 <%end%>
 	  </div>
 	</div>

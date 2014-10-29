@@ -1,5 +1,21 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: [:edit, :update, :destroy]
+
+  def person_exist
+    @person = Person.where(:ci=>params[:id]).first
+    respond_to do |format|
+        format.html
+        format.json { render :json => @person }
+      end
+  end
+
+   def location_exist
+    @location = Location.find(params[:id])
+    respond_to do |format|
+        format.html
+        format.json { render :json => @location }
+      end
+  end
 
   # GET /people
   # GET /people.json
@@ -26,6 +42,9 @@ class PeopleController < ApplicationController
       marker.lng l.longitude
       marker.infowindow l.address.to_s
     end
+    @links = Link.joins(:case).where(:person_id=>@person.id)
+    @links = @links.uniq
+    #links.delete(@link)
   end
 
   # GET /people/new
@@ -43,10 +62,23 @@ class PeopleController < ApplicationController
     @link = Link.find(params[:link_id])
     @person = Person.find(@link.person_id)
     @case = Case.find(@link.case_id)
-    @location_work=Location.new
-    @location_work.place="trabajo"
-
-    @person.location_work_id=@location_work.id
+    if (@person.location_work_id != nil)
+      @location_work = Location.find(@person.location_work_id)
+        @hash = Gmaps4rails.build_markers(@location_work) do |l, marker|
+        marker.lat l.latitude
+        marker.lng l.longitude
+        marker.infowindow l.address.to_s
+      end
+    else
+      @location_work=Location.new
+      @person.location_work_id=@location_work.id
+      @hash = Gmaps4rails.build_markers(@location_work) do |l, marker|
+        marker.lat -17.39435
+        marker.lng -66.16435
+        marker.infowindow "Cochabamba, Bolivia"
+      end
+    end
+    @location_work.place="trabajo"    
   end
 
   # GET /people/1/edit
@@ -61,26 +93,45 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
+    @person = Person.where(:ci=>params[:person][:ci]).first
     @link=Link.new
-    @location=Location.new
-    @link=link_params(@link)
-    @location_home=location_params(@location)
-    @case= Case.find(@link.case_id)
-    if @location_home.save
-      @person.location_home_id=@location_home.id
-      respond_to do |format|
-        if @person.save
-          @link.person_id=@person.id
-          @link.case_id=params[:person][:link][:case_id]
-          if @link.save
-            #format.html { redirect_to continue_new_person_path(@link.id), notice: @person.id }
-            format.html { redirect_to continue_new_path(@link.id), warning: "continue con el registro" }
+    
+    if @person ==nil
+      @link=link_params(@link)
+      @person = Person.new(person_params)
+      @location=Location.new
+      @location_home=location_params(@location)
+      @case= Case.find(@link.case_id)
+      if @location_home.save
+        @person.location_home_id=@location_home.id
+        respond_to do |format|
+          if @person.save
+            @link.person_id=@person.id
+            @link.case_id=params[:person][:link][:case_id]
+            if @link.save
+              format.html { redirect_to continue_new_path(@link.id), warning: "continue con el registro" }
+            end
+          else
+            format.html { render action: 'new' }
+            format.json { render json: @person.errors, status: :unprocessable_entity }
           end
-        else
-          format.html { render action: 'new' }
-          format.json { render json: @person.errors, status: :unprocessable_entity }
         end
+      end
+    else
+      if @person.update(person_params)
+        @link.role=params[:person][:link][:role]
+        @link.case_id=params[:person][:link][:case_id]
+        @link.person_id = @person.id
+        @link.save
+        @location = Location.find(@person.location_home_id)
+        @location = (location_params(@location))
+        if @location.save
+          flash[:warning] = "continue con el registro"
+          redirect_to continue_new_path(@link.id)
+        end
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,14 +140,16 @@ class PeopleController < ApplicationController
 
   def continue_create
     @person = Person.find(params[:person][:id])
-    @person=person_work_params(@person)
-    @location=Location.new
-    @location_work=location_params(@location)
+    @person = person_work_params(@person)
+    @location = Location.new
+    @location_work =  Location.find(@person.location_work_id)
+    @location_work = location_params(@location)
     if @location_work.save
       @person.location_work_id=@location_work.id
       respond_to do |format|
         if @person.save
-            format.html { redirect_to person_path(@person.id), notice: "Persona creada exitosamente" }
+            @link = Link.find(params[:link_id])
+            format.html { redirect_to person_path(@link.id.to_s), notice: "Persona creada exitosamente" }
             format.json { render action: 'show/'+@person.id.to_s, status: :created, location: @person }
         else
           format.html { render action: 'continue_new' }
@@ -141,7 +194,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      #params.require(:person).permit(:ci, :name, :paternal_last_name, :maternal_last_name, :civil_status, :nationality, :natural_of, :work, :work_address, :work_phone, :ocupation, :gender, :phone, :mobile, :birthdate)
       params.require(:person).permit(:ci, :name, :paternal_last_name, :maternal_last_name, :civil_status, :nationality, :natural_of, :gender, :phone, :mobile, :birthdate)
     end
 

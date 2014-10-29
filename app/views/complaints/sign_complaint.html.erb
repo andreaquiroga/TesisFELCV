@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-lg-2">
+    <%= render :partial => 'layouts/left_menu' %>
+  </div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-lg-1">  
+      </div>
+      <div class="col-lg-10">
+        <%= render :partial => 'layouts/case_facts' %>
+        <center><h3>DENUNCIA FIRMADA</h3></center><br/>
+        <form action= "<%=save_complaint_pdf_path%>" method= "post" enctype="multipart/form-data">
+            <input type="hidden" id="complaint_id" name="complaint_id" value="<%=@complaint.id %>">
+            <label>PDF firmado: </label><br/><input type="file" id="pdf" name="pdf" class="form-control"><br/>
+            <input type="submit" value="Guardar" class="btn btn-primary">
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

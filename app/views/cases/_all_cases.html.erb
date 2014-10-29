@@ -2,7 +2,7 @@
   <div class="col-lg-2"></div>
   <div class="col-lg-10">
   <div class="jumbotron">
-  <center><h2>CASOS</h2></center>
+  <%= image_tag("police.jpg", :height=>"80", :width=>"70", :align=>"left") %><%= image_tag("bpaf.png", :height=>"80", :width=>"70", :align=>"right") %><br/><center><h2>CASOS</h2></center><br/><br/>
   
   <br/>
   <form class="navbar-form navbar-left" method="get" action=<%=simple_search_path%> >
@@ -10,7 +10,7 @@
       <label>Codigo: </label>
       <%= text_field_tag :code, params[:code], :class=>'form-control' %>
       <%= hidden_field_tag :mine, params[:mine], :class=>'form-control', :value=>@mine %>
-      <button class="btn btn-primary" type="submit">Buscar</button>
+    <button class="btn btn-primary" type="submit">Buscar</button>
       
   </form>
   <br/><br/><br/><br/>
@@ -18,7 +18,7 @@
     <div class="accordion" id="accordion2">
       <div class="accordion-group">
         <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><h4>BUSQUEDA AVANZADA>></h4>
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><h4><span class="glyphicon glyphicon-search" style="vertical-align:-1px;  margin-right:7px; "></span>BUSQUEDA AVANZADA&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down"></span></h4>
           </a>
         </div>
         <div id="collapseOne" class="accordion-body collapse">
@@ -27,13 +27,13 @@
               <div class="col-lg-10">
                 <form class="navbar-form navbar-left" method="get" action=<%=advanced_search_path%> >
                 <%= hidden_field_tag :mine, params[:mine], :class=>'form-control', :value=>@mine %>
-                <label>Tipo de Agresion:</label>&nbsp;&nbsp;<%= text_field_tag :nature, params[:nature], :class=>'form-control' %><br/>
-                <label>Persona:</label> &nbsp;&nbsp;&nbsp;&nbsp;<%= text_field_tag :name, params[:name], :class=>'form-control' %><br/>
+                <%= text_field_tag :nature, params[:nature], :class=>'form-control',:placeholder => "Naturaleza" %><br/>
+                <%= text_field_tag :name, params[:name], :class=>'form-control', :placeholder => 'Nombre Involucrado(a)'%><br/>
 
                 <% if @mine==false %>
                   <%= render 'researcher'%>
                 <% end %>
-                
+                <br/>
                   <button class="btn btn-primary" type="submit">Buscar</button>
                 </form>
               </div>

@@ -4,6 +4,6 @@ class Location < ActiveRecord::Base
 	:place
 	:address
 	:number
-	has_many :person
-	#has_one :station
+	has_many :people
+	has_one :station
 end

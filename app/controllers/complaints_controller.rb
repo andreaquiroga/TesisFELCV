@@ -1,9 +1,9 @@
 require 'prawn'
 require 'origami'
 require 'openssl'
-
-
+require 'tempfile'
 require 'open-uri'
+require 'pdf/reader'
 
 
 
@@ -20,14 +20,29 @@ class ComplaintsController < ApplicationController
   # GET /complaints/1
   # GET /complaints/1.json
   def show
-     @case=Case.find(@complaint.case_id)
+     @case = Case.find(@complaint.case_id)
+     @links = Link.where(:case_id=>@case.id)
+     @cases = Array.new
+     news = Array.new
+     @links.each do |l|
+        ls = Link.where(:person_id=>l.person_id)
+        ls.each do |li|
+          news.push(li)
+        end
+     end
+     news.each do |n|
+        ca = Case.find(n.case_id)
+        @cases.push(ca)
+     end
+     @cases = @cases.uniq
+     @cases.delete(@case)
   end
 
   # GET /complaints/new
   def new
     @complaint = Complaint.new
     @complaint.case_id=params[:case_id]
-    @case=Case.find(params[:case_id])
+    @case = Case.find(params[:case_id])
   end
 
   # GET /complaints/1/edit
@@ -45,19 +60,26 @@ class ComplaintsController < ApplicationController
   def sign_complaint
     @file_key = params[:key].read
     @private_key = OpenSSL::PKey::RSA.new @file_key, params[:pass_phrase]
-    @complaint_sign = Complaint.generate_pdf(params[:complaint_id])
+    @cs = Complaint.generate_pdf(params[:complaint_id])
     @complaint = Complaint.find(params[:complaint_id])
-    @complaint_sign.render_file @complaint.id.to_s+Date.today.to_s
+    @case = Case.find(@complaint.case_id)
+    @cs.render_file @complaint.id.to_s
     @cert = OpenSSL::X509::Certificate.new(open("C:/Users/Andrea/Dropbox/Aplicaciones/felcv/"+(current_user.upload_cert.path).to_s))
-    @complaint_sign = Complaint.signing_complaint(@complaint, @complaint_sign, @cert, @private_key)
-    
-    puts "----------------------------------------------------------"
-    
-      #@report.sign=true
-      #@report.save
+    Complaint.signing_complaint(@complaint, @cs, @cert, @private_key)
+    @file = File.open("D:/tesis/felcv/app/assets/images/"+@complaint.id.to_s+".pdf")  
+    @complaint.complaint_signed = @file
+    if @complaint.complaint_signed_content_type == 'application/octet-stream'
+      @complaint.complaint_signed_content_type = 'application/pdf'
+    end
+    @complaint.sign = true
+    @complaint.save
+    redirect_to case_path(@complaint.id)
+  end
 
-      flash[:notice]="Denuncia Firmada"
-      redirect_to root_path
+  def save_complaint_pdf
+    @complaint = Complaint.find(params[:complaint_id])
+    @complaint.complaint_signed = params[:pdf]
+    @complaint.save
   end
 
   # POST /complaints

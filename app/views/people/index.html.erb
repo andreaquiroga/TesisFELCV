@@ -18,7 +18,7 @@
     <% @links.each do |link| %>
       <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="panel-title"><a href="<%=person_path(link.person.id)%>"><%= link.person.name %>&nbsp;<%= link.person.paternal_last_name %></a></div>
+            <div class="panel-title"><a href="<%=person_path(link.id)%>"><%= link.person.name %>&nbsp;<%= link.person.paternal_last_name %></a></div>
         </div>
         <div class="panel-body">
             <medium style="color: gray;"><span class="glyphicon glyphicon-gift" style="vertical-align:-1px;  margin-right:3px; "></span>&nbsp;<%= link.person.birthdate %>

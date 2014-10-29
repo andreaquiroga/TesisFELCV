@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016033052) do
+ActiveRecord::Schema.define(version: 20141020010334) do
 
   create_table "cases", force: true do |t|
     t.string   "code"
@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(version: 20141016033052) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "sign"
+    t.string   "complaint_signed_file_name"
+    t.string   "complaint_signed_content_type"
+    t.integer  "complaint_signed_file_size"
+    t.datetime "complaint_signed_updated_at"
   end
 
   add_index "complaints", ["case_id"], name: "index_complaints_on_case_id"
@@ -73,6 +77,11 @@ ActiveRecord::Schema.define(version: 20141016033052) do
     t.integer  "case_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "direct_action_signed_file_name"
+    t.string   "direct_action_signed_content_type"
+    t.integer  "direct_action_signed_file_size"
+    t.datetime "direct_action_signed_updated_at"
+    t.boolean  "sign"
   end
 
   add_index "direct_actions", ["case_id"], name: "index_direct_actions_on_case_id"
@@ -95,6 +104,10 @@ ActiveRecord::Schema.define(version: 20141016033052) do
     t.integer  "case_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "interview_signed_file_name"
+    t.string   "interview_signed_content_type"
+    t.integer  "interview_signed_file_size"
+    t.datetime "interview_signed_updated_at"
   end
 
   add_index "interviews", ["case_id"], name: "index_interviews_on_case_id"

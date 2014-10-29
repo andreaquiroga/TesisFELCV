@@ -56,6 +56,10 @@ gem 'prawn'
 
 gem 'origami'
 
+gem 'prawn-table'
+
+gem 'pdf-reader'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

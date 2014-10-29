@@ -20,7 +20,9 @@ class Person < ActiveRecord::Base
       validates :phone,
           :presence  => { :message => " El campo no puede ser nulo" },
     	     :numericality => {:only_integer => true, :greater_than_or_equal_to => 999999, :message => "El dato debe ser un numero de la menos 7 digitos"}      
+      
       has_many :links
-#      belongs_to :location, :class_name=>"Location", :foreign_key=>'location_home_id'
-#      belongs_to :location, :class_name=>"Location", :foreign_key=>'location_work_id'
+      belongs_to :home, :class_name=>"Location", :foreign_key=>'location_home_id'
+      belongs_to :loc_work, :class_name=>"Location", :foreign_key=>'location_work_id'
+      
 end
