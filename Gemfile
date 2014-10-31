@@ -50,6 +50,8 @@ gem 'wicked_pdf'
 
 gem 'wkhtmltopdf-binary'
 
+gem 'rails_12factor', group: :production
+
 gem 'gchartrb'
 
 gem 'prawn'
