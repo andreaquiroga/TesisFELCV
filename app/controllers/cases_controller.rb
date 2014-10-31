@@ -59,7 +59,7 @@ class CasesController < ApplicationController
     @case_complete.code = "felcv-"+@case.id.to_s+"-cbba"
     if @case_complete.save
       UserMailer.new_case_mailer(@case, @user).deliver
-      flash[:notice] = "Caso creado."+@user.name
+      flash[:notice] = "Caso creado."
       redirect_to case_path(@case.id)
     else
       flash[:notice] = "Error al crear el caso, contacte al administrador."

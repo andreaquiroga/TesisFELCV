@@ -38,7 +38,9 @@
 			     </ul>
 		  	
 		  <br/>
+      <%if @interview.sign == nil %>
     	  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Pregunta</a>
+        <%end%>
 		  <div class="modal" id="basicModal">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -52,13 +54,28 @@
 		       <label>Respuesta: </label><p><%= q.text_area :answer, :class=>'form-control' %></p>
 		      </div>
 		      <div class="modal-footer">
+          
 		        <div><%= q.submit "Añadir", :class=>"btn btn-primary" %></div>
+          
 		      </div>
 		    <%end%>
 		    </div>
 		  </div>
 		  </div>
 		 <%end%>
+
+<%if @interview.sign == nil %>
+
+<form class="navbar-form navbar-left" method="get" action=<%= private_key_interview_path(@interview.case_id)%> >
+    <button type="submit" class="btn btn-primary">
+    <span class="glyphicon glyphicon-barcode" style="vertical-align:-1px;  margin-right:7px; "></span> 
+    Firmar Digitalmente
+  </button>
+</form>
+<%else%>
+<h4><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;<a href="<%=@interview.interview_signed.url(download: true)%>">Descargar Entervista Firmada</a></h4>
+<%end%>
+
       </div>
     </div>
    </div>

@@ -57,18 +57,18 @@
   		    	  <h5>Nombre <b><%=p.name%></b></h5>
   				    <h5>Descripcion.- <%=p.description%></h5>
   				    <h5>Lugar.- <%=p.place%></h5>
-  		      	<a href="#" data-toggle="modal" data-target="#myModal">Editar</a>
-              |
-  				    <%= link_to 'Eliminar', destroy_item_path(p.id), data: { confirm: 'Confirma que desea eliminar el objeto?'} %>
+  		      	<%= link_to 'Eliminar', destroy_item_path(p.id), data: { confirm: 'Confirma que desea eliminar el objeto?'} %>
 				    </li>
 			      <%end%>
 		      </ul>
           <% end %>
+          <div><%= d.submit "Guardar", :class=>"btn btn-primary"%></div><br/><br/>
           <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Objeto</a>
           <%= render 'new_item' %><br/><br/>
-        <%= link_to 'Atras', direct_action_path(@direct_action.id) %>
-		      <div><%= d.submit "Guardar", :class=>"btn btn-primary"%></div><br/><br/>
+        
+		      
         <% end %>
+        <%= link_to 'Atras', direct_action_path(@direct_action.id) %>
         
       </div>
     </div>

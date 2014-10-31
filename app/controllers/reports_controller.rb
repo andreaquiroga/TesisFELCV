@@ -20,13 +20,15 @@ class ReportsController < ApplicationController
     @p = @cases['agresion psicologica']
     @report.name = "TIPO AGRESION"
     @report.date = Date.today
-    @report.save
-    @cases.each do |key, value|
-      @result = Result.new
-      @result.label = key.to_s
-      @result.porcentage = value.to_s
-      @result.report_id = @report.id
-      @result.save
+    if Date.today.day == 1
+      @report.save
+      @cases.each do |key, value|
+        @result = Result.new
+        @result.label = key.to_s
+        @result.porcentage = value.to_s
+        @result.report_id = @report.id
+        @result.save
+      end
     end
     @resp = Result.where(:report_id => @report.id)
   end
@@ -41,13 +43,15 @@ class ReportsController < ApplicationController
     @e = @cases[5]
     @report.name = "CANTIDAD CASOS"
     @report.date = Date.today
-    @report.save
-    @cases.each do |key, value|
-      @result = Result.new
-      @result.label = key.to_s
-      @result.porcentage = value.to_s
-      @result.report_id = @report.id
-      @result.save
+    if Date.today.day == 1
+      @report.save
+      @cases.each do |key, value|
+        @result = Result.new
+        @result.label = key.to_s
+        @result.porcentage = value.to_s
+        @result.report_id = @report.id
+        @result.save
+      end
     end
   end
 
@@ -58,13 +62,34 @@ class ReportsController < ApplicationController
     @m = @cases['Masculino']
     @report.name = "GENERO VICTIMAS"
     @report.date = Date.today
-    @report.save
-    @cases.each do |key, value|
-      @result = Result.new
-      @result.label = key.to_s
-      @result.porcentage = value.to_s
-      @result.report_id = @report.id
-      @result.save
+    if Date.today.day == 1
+      @report.save
+      @cases.each do |key, value|
+        @result = Result.new
+        @result.label = key.to_s
+        @result.porcentage = value.to_s
+        @result.report_id = @report.id
+        @result.save
+      end
+    end
+  end
+
+  def fourth
+    @report = Report.new
+    @cases = Link.joins(:person).where('role = ?', 'Agresor').group('gender').count('id')
+    @f = @cases['Femenino']
+    @m = @cases['Masculino']
+    @report.name = "GENERO AGRESOR"
+    @report.date = Date.today
+    if Date.today.day == 1
+      @report.save
+      @cases.each do |key, value|
+        @result = Result.new
+        @result.label = key.to_s
+        @result.porcentage = value.to_s
+        @result.report_id = @report.id
+        @result.save
+      end
     end
   end
 

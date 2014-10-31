@@ -70,7 +70,22 @@
 		  <h5>No existen objetos registrados</h5>
 		<% end %>
       <br/><br/>
-      <%= link_to 'Editar', edit_direct_action_path(@direct_action) %>
+      <%if @direct_action.sign == nil %>
+		<form class="navbar-form navbar-left" method="get" action=<%= edit_direct_action_path(@direct_action.id)%> >
+		                <button type="submit" class="btn btn-primary">
+		                  <span class="glyphicon glyphicon-edit" style="vertical-align:-1px;  margin-right:7px; "></span> 
+		                  Editar
+		                </button>
+		</form>
+		<form class="navbar-form navbar-left" method="get" action=<%= private_key_direct_action_path(@direct_action.case_id)%> >
+		    <button type="submit" class="btn btn-primary">
+		    <span class="glyphicon glyphicon-barcode" style="vertical-align:-1px;  margin-right:7px; "></span> 
+		    Firmar Digitalmente
+		  </button>
+		</form>
+		<%else%>
+		<h4><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;<a href="<%=@direct_action.direct_action_signed.url(download: true)%>">Descargar Direct Action Firmada</a></h4>
+		<%end%>
       </div>
     </div>
    </div>

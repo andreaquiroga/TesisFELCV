@@ -24,10 +24,11 @@
   		  <%= f.hidden_field :case_id %>
     	  <%= f.hidden_field :id %>
     	  <h5 align="justify"><%=@interview.resume%></h5>
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Pregunta</a>
+        <%= render 'new_question' %>
 
 		 <%end%>
-     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">A&ntilde;adir Pregunta</a>
-        <%= render 'new_question' %>
+     
       </div>
     </div>
    </div>

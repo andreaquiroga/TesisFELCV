@@ -119,8 +119,11 @@
     url: "/people/person_exist/"+document.getElementById('person_ci').value,
     success: function(person){
         document.getElementById('person_name').value = person.name
+        document.getElementById('person_name').disabled =  true
         document.getElementById('person_paternal_last_name').value = person.paternal_last_name
+        document.getElementById('person_paternal_last_name').disabled = true
         document.getElementById('person_maternal_last_name').value = person.maternal_last_name
+        document.getElementById('person_maternal_last_name').disabled = true
         document.getElementById('person_birthdate').value = person.birthdate
         document.getElementById('person_gender').value = person.gender
         document.getElementById('person_civil_status').value = person.civil_status

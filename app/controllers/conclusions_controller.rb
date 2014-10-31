@@ -1,5 +1,6 @@
 class ConclusionsController < ApplicationController
   before_action :set_conclusion, only: [:show, :edit, :destroy]
+  skip_before_filter :verify_authenticity_token
 
   # GET /conclusions
   # GET /conclusions.json
@@ -23,6 +24,35 @@ class ConclusionsController < ApplicationController
   # GET /conclusions/1/edit
   def edit
     @case = Case.find(@conclusion.case_id)
+  end
+
+  def private_key
+    @case = Case.find(params[:id])
+    @conclusion = Conclusion.where(:case_id=>params[:id]).first
+    @user=User.find(current_user.id)
+  end
+
+  def sign_conclusion
+    @file_key = params[:key].read
+    @private_key = OpenSSL::PKey::RSA.new @file_key, params[:pass_phrase]
+    @cs = Conclusion.generate_pdf(params[:conclusion_id])
+    @conclusion = Conclusion.find(params[:conclusion_id])
+    @case = Case.find(@conclusion.case_id)
+    @cs.render_file @conclusion.id.to_s
+    if current_user.upload_cert ==nil
+      flash[:warning] = "No se puede encontrar su Certificado Digital"
+      redirect_to case_path(@case.id)
+    end
+    @cert = OpenSSL::X509::Certificate.new(open("C:/Users/Andrea/Dropbox/Aplicaciones/felcv/"+(current_user.upload_cert.path).to_s))
+    Conclusion.signing_conclusion(@conclusion, @cs, @cert, @private_key)
+    @file = File.open("D:/tesis/felcv/app/assets/images/c_"+@conclusion.id.to_s+".pdf")  
+    @conclusion.conclusion_signed = @file
+    if @conclusion.conclusion_signed_content_type == 'application/octet-stream'
+      @conclusion.conclusion_signed_content_type = 'application/pdf'
+    end
+    @conclusion.sign = true
+    @conclusion.save
+    redirect_to conclusion_path(@conclusion.id)
   end
 
   # POST /conclusions

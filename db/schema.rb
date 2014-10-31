@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020010334) do
+ActiveRecord::Schema.define(version: 20141031140054) do
 
   create_table "cases", force: true do |t|
     t.string   "code"
@@ -57,6 +57,11 @@ ActiveRecord::Schema.define(version: 20141020010334) do
     t.integer  "case_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "conclusion_signed_file_name"
+    t.string   "conclusion_signed_content_type"
+    t.integer  "conclusion_signed_file_size"
+    t.datetime "conclusion_signed_updated_at"
+    t.boolean  "sign"
   end
 
   add_index "conclusions", ["case_id"], name: "index_conclusions_on_case_id"

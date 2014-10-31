@@ -1,5 +1,6 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: [:show, :edit, :update, :destroy]
+   skip_before_filter :verify_authenticity_token
 
   # GET /interviews
   # GET /interviews.json
@@ -30,6 +31,35 @@ class InterviewsController < ApplicationController
     @question = Question.new
   end
 
+  def private_key
+    @case = Case.find(params[:id])
+    @interview = Interview.where(:case_id=>params[:id]).first
+    @user=User.find(current_user.id)
+  end
+
+  def sign_interview
+    @file_key = params[:key].read
+    @private_key = OpenSSL::PKey::RSA.new @file_key, params[:pass_phrase]
+    @cs = Interview.generate_pdf(params[:interview_id])
+    @interview = Interview.find(params[:interview_id])
+    @case = Case.find(@interview.case_id)
+    @cs.render_file @interview.id.to_s
+    if current_user.upload_cert == nil
+      flash[:warning] = "No se puede encontrar su Certificado Digital"
+      redirect_to case_path(@case.id)
+    end
+    @cert = OpenSSL::X509::Certificate.new(open("C:/Users/Andrea/Dropbox/Aplicaciones/felcv/"+(current_user.upload_cert.path).to_s))
+    Interview.signing_interview(@interview, @cs, @cert, @private_key)
+    @file = File.open("D:/tesis/felcv/app/assets/images/i_"+@interview.id.to_s+".pdf")  
+    @interview.interview_signed = @file
+    if @interview.interview_signed_content_type == 'application/octet-stream'
+      @interview.interview_signed_content_type = 'application/pdf'
+    end
+    @interview.sign = true
+    @interview.save
+    redirect_to edit_interview_path(@interview.id)
+  end
+
   # POST /interviews
   # POST /interviews.json
   def create
@@ -45,7 +75,15 @@ class InterviewsController < ApplicationController
   end
 
   def create_question
-    
+    @interview = Interview.find(params[:interview][:id])
+    @question = Question.new(question_params)
+    @question.interview_id = @interview.id
+    respond_to do |format|
+      if @question.save
+        format.html { redirect_to edit_interview_path(params[:interview][:id]), notice: 'Pregunta creada!' }
+        format.json { render action: 'edit', status: :created, location: @interview }
+      end
+    end
   end
 
   def edit_question

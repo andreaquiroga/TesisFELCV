@@ -14,8 +14,8 @@ class Complaint < ActiveRecord::Base
     :dropbox_credentials => Rails.root.join("config/dropbox.yml"),
     :dropbox_options => {:path => proc{|style| "complaints/#{id}"}}
 
-    validates_attachment_presence :complaint_signed
-    validates_attachment_content_type :complaint_signed, :content_type => /application\/pdf/
+    validates_attachment :complaint_signed, content_type: { content_type: ["application/pdf"] }
+    
 
 	belongs_to :case
 

@@ -10,8 +10,8 @@
       <div class="col-lg-10">
         <%= render :partial => 'layouts/case_facts' %>
         <center><h3>LLAVE PRIVADA</h3></center><br/>
-        <form action= "<%=sign_complaint_path%>" method= "post" enctype="multipart/form-data">
-            <input type="hidden" id="complaint_id" name="complaint_id" value="<%=@complaint.id %>">
+        <form action= "<%=sign_interview_path%>" method= "post" enctype="multipart/form-data">
+            <input type="hidden" id="interview_id" name="interview_id" value="<%=@interview.id %>">
             <label>Clave llave privada: </label><input type="password" id="pass_phrase" name="pass_phrase" class="form-control"><br/>
             <label>Llave privada: </label><br/><input type="file" id="key" name="key" class="form-control"><br/>
             <input type="submit" value="Listo" class="btn btn-primary">

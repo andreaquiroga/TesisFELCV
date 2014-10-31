@@ -10,20 +10,39 @@ def new
 end
 
 def create
-	@user = User.new(user_params)
-	if @user.role?("investigador")
-		@max=User.maximum("turn")
-		@user.turn=(@max.to_i+1).to_s
-	end
-	@user.valid?
-	if @user.errors.blank?
-		if @user.save(:validate=>false)
-			flash[:notice] = "Usuario registrado."
-			redirect_to user_path(@user.id)
+	@sec = User.group('station_id').where(:role => "secretaria", :status => "Activo" ).first
+	if params[:user][:role] == "secretaria" 
+		if @sec == nil 
+			@user = User.new(user_params)
+			@user.valid?
+			if @user.errors.blank?
+				if @user.save(:validate=>false)
+					flash[:notice] = "Usuario registrado."
+					redirect_to user_path(@user.id)
+				end
+			else
+				render :action => "new"
+			end
+		else
+			flash[:notice] = "La unidad ya tiene secretaria registrada."
+			render :action => "new"
 		end
-	else
-		render :action => "new"
 	end
+	else
+		@user = User.new(user_params)
+		if @user.role?("investigador")
+			@max=User.maximum("turn")
+			@user.turn=(@max.to_i+1).to_s
+		end
+		@user.valid?
+		if @user.errors.blank?
+			if @user.save(:validate=>false)
+				flash[:notice] = "Usuario registrado."
+				redirect_to user_path(@user.id)
+			end
+		else
+			render :action => "new"
+		end
 end
 
 def index

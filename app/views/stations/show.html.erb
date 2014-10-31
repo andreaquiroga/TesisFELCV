@@ -51,5 +51,6 @@
 	</div>
   </div>
 </div>
-
-<%= link_to 'Editar', edit_station_path(@station) %> |
+<% if current_user.role?("admin") %>
+<%= link_to 'Editar', edit_station_path(@station) %>
+<%end%>

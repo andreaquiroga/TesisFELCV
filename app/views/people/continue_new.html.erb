@@ -60,6 +60,7 @@
         });
         </script><br/>
          <%= f.fields_for @location_work do |o| %>
+                    <%= o.hidden_field  :id, :class=>"form-control"%>
                     <%= o.text_field :address, :class=>"form-control" %>
                     <%= o.hidden_field :place %>
                     <%= o.hidden_field :longitude, :id=>'person_location_longitude' %>

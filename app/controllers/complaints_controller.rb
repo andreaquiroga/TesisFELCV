@@ -64,6 +64,10 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.find(params[:complaint_id])
     @case = Case.find(@complaint.case_id)
     @cs.render_file @complaint.id.to_s
+    if current_user.upload_cert ==nil
+      flash[:warning] = "No se puede encontrar su Certificado Digital"
+      redirect_to case_path(@case.id)
+    end
     @cert = OpenSSL::X509::Certificate.new(open("C:/Users/Andrea/Dropbox/Aplicaciones/felcv/"+(current_user.upload_cert.path).to_s))
     Complaint.signing_complaint(@complaint, @cs, @cert, @private_key)
     @file = File.open("D:/tesis/felcv/app/assets/images/"+@complaint.id.to_s+".pdf")  
@@ -73,7 +77,7 @@ class ComplaintsController < ApplicationController
     end
     @complaint.sign = true
     @complaint.save
-    redirect_to case_path(@complaint.id)
+    redirect_to complaint_path(@complaint.id)
   end
 
   def save_complaint_pdf

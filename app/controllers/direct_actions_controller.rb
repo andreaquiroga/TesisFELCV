@@ -1,8 +1,10 @@
 class DirectActionsController < ApplicationController
   before_action :set_direct_action, only: [:show, :edit, :destroy]
+  skip_before_filter :verify_authenticity_token
 
   # GET /direct_actions
   # GET /direct_actions.json
+  
   def index
     @direct_actions = DirectAction.all
   end
@@ -29,10 +31,43 @@ class DirectActionsController < ApplicationController
     @item = Item.new
   end
 
+  def private_key
+    @case = Case.find(params[:id])
+    @direct_action = DirectAction.where(:case_id=>params[:id]).first
+    @user=User.find(current_user.id)
+  end
+
+  def sign_direct_action
+    @file_key = params[:key].read
+    @private_key = OpenSSL::PKey::RSA.new @file_key, params[:pass_phrase]
+    @cs = DirectAction.generate_pdf(params[:direct_action_id])
+    @direct_action = DirectAction.find(params[:direct_action_id])
+    @case = Case.find(@direct_action.case_id)
+    @cs.render_file @direct_action.id.to_s
+    if current_user.upload_cert == nil
+      flash[:warning] = "No se puede encontrar su Certificado Digital"
+      redirect_to case_path(@case.id)
+    end
+    @cert = OpenSSL::X509::Certificate.new(open("C:/Users/Andrea/Dropbox/Aplicaciones/felcv/"+(current_user.upload_cert.path).to_s))
+    DirectAction.signing_direct_action(@direct_action, @cs, @cert, @private_key)
+    @file = File.open("D:/tesis/felcv/app/assets/images/d_a_"+@direct_action.id.to_s+".pdf")  
+    @direct_action.direct_action_signed = @file
+    if @direct_action.direct_action_signed_content_type == 'application/octet-stream'
+      @direct_action.direct_action_signed_content_type = 'application/pdf'
+    end
+    @direct_action.sign = true
+    @direct_action.save
+    redirect_to direct_action_path(@direct_action.id)
+  end
+
+  
+
   # POST /direct_actions
   # POST /direct_actions.json
   def create
     @direct_action = DirectAction.new(direct_action_params)
+    @case = Case.find(@direct_action.case_id)
+    @item = Item.new
     respond_to do |format| 
       if @direct_action.save
         @item = Item.new(item_params)
@@ -79,7 +114,7 @@ class DirectActionsController < ApplicationController
             format.html { redirect_to edit_direct_action_path(@direct_action.id), notice: '' }
             format.json { render action: 'show', status: :created, location: @direct_action }
           else
-            format.html { redirect_to direct_action_path(@direct_action.id), notice: 'Editado' }
+            format.html { redirect_to direct_action_path(@direct_action.id), notice: 'Accion directa almacenada' }
             format.json { render action: 'show', status: :created, location: @direct_action }
           end
           

@@ -71,7 +71,9 @@ class PeopleController < ApplicationController
       end
     else
       @location_work=Location.new
+      @location_work.save
       @person.location_work_id=@location_work.id
+      @person.save
       @hash = Gmaps4rails.build_markers(@location_work) do |l, marker|
         marker.lat -17.39435
         marker.lng -66.16435
@@ -141,9 +143,9 @@ class PeopleController < ApplicationController
   def continue_create
     @person = Person.find(params[:person][:id])
     @person = person_work_params(@person)
-    @location = Location.new
+    #@location = Location.new
     @location_work =  Location.find(@person.location_work_id)
-    @location_work = location_params(@location)
+    @location_work = location_params(@location_work)
     if @location_work.save
       @person.location_work_id=@location_work.id
       respond_to do |format|

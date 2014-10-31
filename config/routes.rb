@@ -48,12 +48,13 @@ Felcv::Application.routes.draw do
   post 'direct_actions/create' => 'direct_actions#create', :as => 'create_direct_action'
   get 'direct_actions/edit/:id' => 'direct_actions#edit', :as => 'edit_direct_action'
   post 'direct_actions/update' => 'direct_actions#update', :as => 'update_direct_action'
-  get 'direct_actions/key_pass/:id' => 'direct_actions#key_pass', :as => 'key_pass_direct_action'
-  get 'direct_actions/sign/:id' => 'direct_actions#sign', :as => 'sign_direct_action'
+
   get 'direct_actions/create_item' => 'direct_actions#create_item', :as => 'create_item'
   get 'direct_actions/edit_item' => 'direct_actions#edit_item', :as => 'edit_item'
   get 'direct_actions/destroy_item/:id_item' => 'direct_actions#destroy_item', :as => 'destroy_item'
   post 'direct_action/save' => 'direct_actions#save_direct_action', :as => 'save_direct_action'
+   get 'direct_action/private_key/:id' => 'direct_actions#private_key', :as => 'private_key_direct_action'
+  post 'direct_action/sign_direct_action' => 'direct_actions#sign_direct_action', :as => 'sign_direct_action'
   
 
   #people
@@ -79,8 +80,8 @@ Felcv::Application.routes.draw do
   get 'interviews/destroy/:id' => 'interviews#destroy', :as => 'destroy_interview'
   get 'interviews/destroy_question/:id' => 'interviews#destroy_question', :as => 'destroy_question'
   get 'interviews/edit_question/:id' => 'interviews#edit_question', :as => 'edit_question'
-  get 'interviews/sign/:id' => 'interviews#sign', :as => 'sign_interview'
-  get 'interviews/key_pass/:id' => 'interviews#key_pass', :as => 'key_pass_interview'
+   get 'interviews/private_key/:id' => 'interviews#private_key', :as => 'private_key_interview'
+  post 'interviews/sign_interview' => 'interviews#sign_interview', :as => 'sign_interview'
 
   #conclusions
   get 'conclusions/view/:id' => 'conclusions#show', :as => 'conclusion'
@@ -88,6 +89,8 @@ Felcv::Application.routes.draw do
   post 'conclusions/create' => 'conclusions#create', :as => 'create_conclusion'
   get 'conclusions/edit/:id' => 'conclusions#edit', :as => 'edit_conclusion'
   post 'conclusions/update/:id' => 'conclusions#update', :as => 'update_conclusion'
+   get 'conclusions/private_key/:id' => 'conclusions#private_key', :as => 'private_key_conclusion'
+  post 'conclusions/sign_conclusion' => 'conclusions#sign_conclusion', :as => 'sign_conclusion'
 
   #stations
   get 'stations/index' => 'stations#index', :as => 'stations'
