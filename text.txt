@@ -1,0 +1,104 @@
+2014-11-03T16:16:45.606658+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/eventmachine-1.0.3/lib/eventmachine.rb:187:in `run'
+2014-11-03T16:16:45.606659+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/backends/base.rb:73:in `start'
+2014-11-03T16:16:45.606660+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/server.rb:162:in `start'
+2014-11-03T16:16:45.606663+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/thin.rb:16:in `run'
+2014-11-03T16:16:45.606665+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-11-03T16:16:45.606667+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands/server.rb:84:in `start'
+2014-11-03T16:16:45.606668+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands.rb:78:in `block in <top (required)>'
+2014-11-03T16:16:45.606669+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands.rb:73:in `tap'
+2014-11-03T16:16:45.606670+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands.rb:73:in `<top (required)>'
+2014-11-03T16:16:45.606672+00:00 app[web.1]:   bin/rails:4:in `require'
+2014-11-03T16:16:45.606673+00:00 app[web.1]:   bin/rails:4:in `<main>'
+2014-11-03T16:16:45.606674+00:00 app[web.1]: 
+2014-11-03T16:16:45.606675+00:00 app[web.1]: 
+2014-11-03T16:16:45.606679+00:00 app[web.1]: 
+2014-11-03T16:16:45.606710+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.0/lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+2014-11-03T16:16:45.606681+00:00 app[web.1]: ActionController::RoutingError (No route match
+es [GET] "/fonts/glyphicons-halflings-regular.ttf"):
+2014-11-03T16:16:45.606683+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+2014-11-03T16:16:45.606684+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/rack/logger.rb:38:in `call_app'
+2014-11-03T16:16:45.606682+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-11-03T16:16:45.606707+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+2014-11-03T16:16:45.606687+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.0/lib/active_support/tagged_logging.rb:67:in `block in tagged'
+2014-11-03T16:16:45.606688+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.0/lib/active_support/tagged_logging.rb:25:in `tagged'
+2014-11-03T16:16:45.606703+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.0/lib/active_support/tagged_logging.rb:67:in `tagged'
+2014-11-03T16:16:45.606704+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/rack/logger.rb:21:in `call'
+2014-11-03T16:16:45.606706+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+2014-11-03T16:16:45.606708+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/runtime.rb:17:in `call'
+2014-11-03T16:16:45.606685+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/rack/logger.rb:21:in `block in call'
+2014-11-03T16:16:45.606711+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb:64:in `call'
+2014-11-03T16:16:45.606712+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/engine.rb:511:in `call'
+2014-11-03T16:16:45.606713+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/application.rb:97:in `call'
+2014-11-03T16:16:45.606715+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/content_length.rb:14:in `call'
+2014-11-03T16:16:45.606716+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/connection.rb:86:in `block in pre_process'
+2014-11-03T16:16:45.606718+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/connection.rb:84:in `catch'
+2014-11-03T16:16:45.606725+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/connection.rb:84:in `pre_process'
+2014-11-03T16:16:45.606726+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/connection.rb:53:in `process'
+2014-11-03T16:16:45.606731+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/backends/base.rb:73:in `start'
+2014-11-03T16:16:45.606733+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/server.rb:162:in `start'
+2014-11-03T16:16:45.606735+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-11-03T16:16:45.606729+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/eventmachine-1.0.3/lib/eventmachine.rb:187:in `run_machine'
+2014-11-03T16:16:45.606728+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/thin-1.6.3/lib/thin/connection.rb:39:in `receive_data'
+2014-11-03T16:16:45.606730+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/eventmachine-1.0.3/lib/eventmachine.rb:187:in `run'
+2014-11-03T16:16:45.606737+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands/server.rb:84:in `start'
+2014-11-03T16:16:45.606734+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/thin.rb:16:in `run'
+2014-11-03T16:16:45.606738+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands.rb:78:in `block in <top (required)>'
+2014-11-03T16:16:45.606739+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands.rb:73:in `tap'
+2014-11-03T16:16:45.606740+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-4.0.0/lib/rails/commands.rb:73:in `<top (required)>'
+2014-11-03T16:16:45.606743+00:00 app[web.1]:   bin/rails:4:in `<main>'
+2014-11-03T16:16:45.606744+00:00 app[web.1]: 
+2014-11-03T16:16:45.606745+00:00 app[web.1]: 
+2014-11-03T16:16:45.606742+00:00 app[web.1]:   bin/rails:4:in `require'
+2014-11-03T16:16:45.
+432240+00:00 heroku[router]: at=info method=GET path="/fonts/glyphicons-halflings-regular.woff" host=felcv-cochabamba.herokuapp.com request_id=347f70c8-c091-458e-91b4-b0108220ea8e fwd="181.177.188.61" dyno=web.1 connect=1ms service=4ms status=404 bytes=1545
+2014-11-03T16:16:45.608028+00:00 heroku[router]: at=info method=GET path="/fonts/glyphicons-halflings-regular.ttf" host=felcv-cochabamba.herokuapp.com request_id=03ff1278-800b-4f32-a9aa-76a5d2916e43 fwd="181.177.188.61" dyno=web.1 connect=1ms service=4ms status=404 bytes=1545
+2014-11-03T16:16:45.787170+00:00 heroku[router]: at=info method=GET path="/assets/glyphicons-halflings-regular.woff" host=felcv-cochabamba.herokuapp.com request_id=4c69578b-e564-448c-975d-221aa6c17691 fwd="181.177.188.61" dyno=web.1 connect=1ms service=2ms status=304 bytes=160
+2014-11-03T16:16:45.785853+00:00 app[web.1]: Started GET "/assets/glyphicons-halflings-regular.woff" for 181.177.188.61 at 2014-11-03 16:16:45 +0000
+2014-11-03T16:16:45.785863+00:00 app[web.1]: Started GET "/assets/glyphicons-halflings-regular.woff" for 181.177.188.61 at 2014-11-03 16:16:45 +0000
+2014-11-03T16:16:49.098967+00:00 app[web.1]: Started GET "/cases/new" for 181.177.188.61 at 2014-11-03 16:16:49 +0000
+2014-11-03T16:16:49.101802+00:00 app[web.1]: Processing by CasesController#new as HTML
+2014-11-03T16:16:49.191839+00:00 app[web.1]:   Rendered user_mailer/new_case_mailer.html.erb (0.6ms)
+2014-11-03T16:16:49.098971+00:00 app[web.1]: Started GET "/cases/new" for 181.177.188.61 at 2014-11-03 16:16:49 +0000
+2014-11-03T16:16:49.191848+00:00 app[web.1]:   Rendered user_mailer/new_case_mailer.html.erb (0.6ms)
+2014-11-03T16:16:49.101836+00:00 app[web.1]: Processing by CasesController#new as HTML
+2014-11-03T16:16:49.205535+00:00 app[web.1]: Sent mail to andy.afqy@gmail.com (10.9ms)
+2014-11-03T16:16:49.205528+00:00 app[web.1]: 
+2014-11-03T16:16:49.205541+00:00 app[web.1]: 
+2014-11-03T16:16:49.205542+00:00 app[web.1]: Sent mail to andy.afqy@gmail.com (10.9ms)
+2014-11-03T16:16:49.205724+00:00 app[web.1]: Completed 500 Internal Server Error in 104ms
+2014-11-03T16:16:49.205767+00:00 app[web.1]: Completed 500 Internal Server Error in 104ms
+2014-11-03T16:16:49.207318+00:00 app[web.1]: 
+2014-11-03T16:16:49.207322+00:00 app[web.1]: Errno::ECONNREFUSED (Connection refused - connect(2)):
+2014-11-03T16:16:49.207334+00:00 app[web.1]: Errno::ECONNREFUSED (Connection refused - connect(2)):
+2014-11-03T16:16:49.207339+00:00 app[web.1]: 
+2014-11-03T16:16:49.207336+00:00 app[web.1]:   app/controllers/cases_controller.rb:61:in `new'
+2014-11-03T16:16:49.207327+00:00 app[web.1]: 
+2014-11-03T16:16:49.207338+00:00 app[web.1]: 
+2014-11-03T16:16:49.207324+00:00 app[web.1]:   app/controllers/cases_controller.rb:61:in `new'
+2014-11-03T16:16:49.207332+00:00 app[web.1]: 
+2014-11-03T16:16:49.207325+00:00 app[web.1]: 
+2014-11-03T16:16:49.210347+00:00 heroku[router]: at=info method=GET path="/cases/new" host=felcv-cochabamba.herokuapp.com request_id=ea8bcc6a-e906-4074-ae72-9730e15b8535 fwd="181.177.188.61" dyno=web.1 connect=1ms service=112ms status=500 bytes=1472
+2014-11-03T16:16:49.385196+00:00 app[web.1]: Started GET "/cases/new" for 181.177.188.61 at 2014-11-03 16:16:49 +0000
+2014-11-03T16:16:49.385204+00:00 app[web.1]: Started GET "/cases/new" for 181.177.188.61 at 2014-11-03 16:16:49 +0000
+2014-11-03T16:16:49.386927+00:00 app[web.1]: Processing by CasesController#new as HTML
+2014-11-03T16:16:49.386934+00:00 app[web.1]: Processing by CasesController#new as HTML
+2014-11-03T16:16:49.429182+00:00 app[web.1]:   Rendered user_mailer/new_case_mailer.html.erb (0.1ms)
+2014-11-03T16:16:49.438907+00:00 app[web.1]: 
+2014-11-03T16:16:49.439254+00:00 app[web.1]: Completed 500 Internal Server Error in 52ms
+2014-11-03T16:16:49.441843+00:00 app[web.1]: 
+2014-11-03T16:16:49.429197+00:00 app[web.1]:   Rendered user_mailer/new_case_mailer.html.erb (0.1ms)
+2014-11-03T16:16:49.438914+00:00 app[web.1]: Sent mail to andy.afqy@gmail.com (8.1ms)
+2014-11-03T16:16:49.438953+00:00 app[web.1]: Sent mail to andy.afqy@gmail.com (8.1ms)
+2014-11-03T16:16:49.441846+00:00 app[web.1]: Errno::ECONNREFUSED (Connection refused - connect(2)):
+2014-11-03T16:16:49.441848+00:00 app[web.1]:   app/controllers/cases_controller.rb:61:i
+n `new'
+2014-11-03T16:16:49.441849+00:00 app[web.1]: 
+2014-11-03T16:16:49.438951+00:00 app[web.1]: 
+2014-11-03T16:16:49.439235+00:00 app[web.1]: Completed 500 Internal Server Error in 52ms
+2014-11-03T16:16:49.441854+00:00 app[web.1]: 
+2014-11-03T16:16:49.441856+00:00 app[web.1]: Errno::ECONNREFUSED (Connection refused - connect(2)):
+2014-11-03T16:16:49.441857+00:00 app[web.1]:   app/controllers/cases_controller.rb:61:in `new'
+2014-11-03T16:16:49.441858+00:00 app[web.1]: 
+2014-11-03T16:16:49.441859+00:00 app[web.1]: 
+2014-11-03T16:16:49.441850+00:00 app[web.1]: 
+2014-11-03T16:16:49.442913+00:00 heroku[router]: at=info method=GET path="/cases/new" host=felcv-cochabamba.herokuapp.com request_id=7e3913e1-e46a-4d0b-8c16-de1fd7453292 fwd="181.177.188.61" dyno=web.1 connect=5ms service=61ms status=500 bytes=1472
