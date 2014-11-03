@@ -16,9 +16,6 @@ class User < ActiveRecord::Base
     :length => {:minimum => 5, :maximum => 10, :message => "tiene como longitud minina 5 y como maxima 10"},
     :uniqueness  => { :message => " existente, elija otro " },
     :numericality => {:only_integer => true, :message => " debe ser un numero"}
-  # :cert
-  # :private_key
-
   validates :name, :paternal_last_name, :grade, :address, :last_work,
     :presence  => { :message => " es requerido " },
     :length => {:minimum => 1, :message => " tiene como longitud minina: 1 "}

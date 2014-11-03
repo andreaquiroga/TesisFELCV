@@ -3,7 +3,7 @@
 <div class="jumbotron">
 	<center><h2>REGISTRARSE</h2></center><br/>
 	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |o| %>
-  	<!--<%= devise_error_messages! %>-->
+  	
   	<% if resource.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(resource.errors.count, "errorre") %> encontrados:</h2>
@@ -44,7 +44,7 @@
 	          <label>Ingreso a la Institucion:</label>
 	          <%= o.text_field :admission_date, 'data-behaviour' => 'datepicker', :class=>'form-control' %>        
               <label>Email:</label>
-		  	  <%= o.email_field :email, :class=>"form-control"  %>
+		  	  <%= o.text_field :email, :class=>"form-control"  %>
 		      <!--<label>Contrasenia:</label>-->
 	    	  <%= o.hidden_field :password, autocomplete: "off", :class=>"form-control" %>
 	    	  <%= o.hidden_field :password_confirmation, autocomplete: "off", :class=>"form-control" %>

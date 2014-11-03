@@ -11,16 +11,17 @@ end
 
 def create
 	@user = User.new(user_params)
-	@sec = User.where(:role => "secretaria", :status => "Activo" , :station_id => @user.station_id).first
+	@sec = User.where(:role => "secretaria" , :station_id => @user.station_id).first
 	if params[:user][:role] == "secretaria" 
 		if @sec == nil 
-			@user.valid?
+			#@user.valid?
 			if @user.errors.blank?
 				if @user.save(:validate=>false)
 					flash[:notice] = "Usuario registrado."
 					redirect_to user_path(@user.id)
 				end
 			else
+
 				render :action => "new"
 			end
 		else
@@ -39,6 +40,7 @@ def create
 				redirect_to user_path(@user.id)
 			end
 		else
+			flash[:error] = "Hay errores pendientes:"
 			render :action => "new"
 		end
 	end
