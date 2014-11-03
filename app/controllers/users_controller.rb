@@ -10,7 +10,7 @@ def new
 end
 
 def create
-	@sec = User.group('station_id').where(:role => "secretaria", :status => "Activo" ).first
+	@sec = User.group('station_id', 'id').where(:role => "secretaria", :status => "Activo" ).first
 	if params[:user][:role] == "secretaria" 
 		if @sec == nil 
 			@user = User.new(user_params)

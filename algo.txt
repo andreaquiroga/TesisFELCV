@@ -1,0 +1,101 @@
+2014-11-03T01:07:48.935605+00:00 app[web.1]: 
+2014-11-03T01:07:48.935608+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::GroupingError: ERROR:  column "users.id" must appear in the GROUP BY clause or be used in an aggregate function
+2014-11-03T01:07:48.935609+00:00 app[web.1]: LINE 1: SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secr...
+2014-11-03T01:07:48.935611+00:00 app[web.1]:                 ^
+2014-11-03T01:07:48.935613+00:00 app[web.1]: : SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secretaria' AND "users"."status" = 'Activo' GROUP BY station_id  ORDER BY "users"."id" ASC LIMIT 1):
+2014-11-03T01:07:48.935614+00:00 app[web.1]:   app/controllers/users_controller.rb:13:in `create'
+2014-11-03T01:07:48.935616+00:00 app[web.1]: 
+2014-11-03T01:07:48.929967+00:00 app[web.1]: : SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secretaria' AND "users"."status" = 'Activo' GROUP BY station_id  ORDER BY "users"."id" ASC LIMIT 1
+2014-11-03T01:07:48.929965+00:00 app[web.1]:                 ^
+2014-11-03T01:07:48.935617+00:00 app[web.1]: 
+2014-11-03T01:07:48.938324+00:00 heroku[router]: at=info method=POST path="/users" host=felcv-cochabamba.herokuapp.com request_id=75e2b5de-8ed4-479c-b857-1be148215471 fwd="190.106.252.179" dyno=web.1 connect=5ms service=26ms status=500 bytes=1472
+2014-11-03T01:07:49.284055+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=felcv-cochabamba.herokuapp.com request_id=4885e4ce-b196-4bfe-a7a6-4675d6c3cdf4 fwd="190.106.252.179" dyno=web.1 connect=2ms service=3ms status=304 bytes=62
+2014-11-03T02:15:24.732258+00:00 heroku[web.1]: Idling
+2014-11-03T02:15:24.732808+00:00 heroku[web.1]: State changed from up to down
+2014-11-03T02:15:27.005440+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-11-03T02:15:28.098610+00:00 app[web.1]: Exiting
+2014-11-03T02:15:29.126226+00:00 heroku[web.1]: Process exited with status 0
+2014-11-03T15:00:49.016552+00:00 heroku[web.1]: Unidling
+2014-11-03T15:00:49.017010+00:00 heroku[web.1]: State changed from down to starting
+2014-11-03T15:00:56.540503+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 44305 -e production`
+2014-11-03T15:01:02.253809+00:00 app[web.1]: /app/app/controllers/users_controller.rb:46: warning: else without rescue is useless
+2014-11-03T15:01:02.487782+00:00 app[web.1]: => Booting Thin
+2014-11-03T15:01:02.487790+00:00 app[web.1]: => Rails 4.0.0 application starting in production on http://0.0.0.0:44305
+2014-11-03T15:01:02.487802+00:00 app[web.1]: Maximum connections set to 1024
+2014-11-03T15:01:02.487804+00:00 app[web.1]: Listening on 0.0.0.0:44305, CTRL+C to stop
+2014-11-03T15:01:02.487792+00:00 app[web.1]: => Run `rails server -h` for more startup options
+2014-11-03T15:01:02.487795+00:00 app[web.1]: Thin web server (v1.6.3 codename Protein Powder)
+2014-11-03T15:01:02.487793+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-11-03T15:01:03.089185+00:00 heroku[web.1]: State changed from starting to up
+2014-11-03T15:01:03.950589+00:00 app[web.1]: Started GET "/users/sign_up" for 181.177.188.61 at 2014-11-03 15:01:03 +0000
+2014-11-03T15:01:03.950641+00:00 app[web.1]: Started GET "/users/sign_up" for 181.177.188.61 at 2014-11-03 15:01:03 +0000
+2014-11-03T15:01:04.136131+00:00 app[web.1]: Processing by UsersController#new as HTML
+2014-11-03T15:01:04.137380+00:00 app[web.1]: Processing by UsersController#new as HTML
+2014-11-03T15:01:04.931123+00:00 heroku[router]: at=info method=GET path="/users/sign_up" host=felcv-cochabamba.herokuapp.com request_id=2a9b4de6-2d47-4c00-b031-467317be6ea1 fwd="181.177.188.61" dyno=web.1 connect=2ms service=981ms status=200 bytes=8748
+2014-11-03T15:01:04.892970+00:00 app[web.1]:   Rendered users/new.html.erb within layouts/application (273.8ms)
+2014-11-03T15:01:04.927852+00:00 app[web.1]: Processing by UsersController#new as HTML
+2014-11-03T15:01:04.915763+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (17.1ms)
+2014-11-03T15:01:04.917782+00:00 app[web.1]:   Rendered layouts/_header.html.erb (0.7ms)
+2014-11-03T15:01:04.917786+00:00 app[web.1]:   Rendered layouts/_header.html.erb (0.7ms)
+2014-11-03T15:01:04.921346+00:00 app[web.1]: Completed 200 OK in 784ms (Views: 182.5ms | ActiveRecord: 229.8ms)
+2014-11-03T15:01:04.921353+00:00 app[web.1]: Completed 200 OK in 784ms (Views: 182.5ms | ActiveRecord: 229.8ms)
+2014-11-03T15:01:04.927859+00:00 app[web.1]: Processing by UsersController#new as HTML
+2014-11-03T15:01:04.923776+00:00 app[web.1]: Started GET "/users/sign_up" for 181.177.188.61 at 2014-11-03 15:01:04 +0000
+2014-11-03T15:01:04.915681+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (17.1ms)
+2014-11-03T15:01:04.923769+00:00 app[web.1]: Started GET "/users/sign_up" for 181.177.188.61 at 2014-11-03 15:01:04 +0000
+2014-11-03T15:01:04.895406+00:00 app[web.1]:   Rendered users/new.html.erb within layouts/application (273.8ms)
+2014-11-03T15:01:05.313719+00:00 app[web.1]: Completed 200 OK in 385ms (Views: 50.6ms | ActiveRecord: 21.1ms)
+2014-11-03T15:01:05.316125+00:00 app[web.1]: Started GET "/users/sign_up" for 181.177.188.61 at 2014-11-03 15:01:05 +0000
+2014-11-03T15:01:05.308862+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (8.6ms)
+2014-11-03T15:01:05.309272+00:00 app[web.1]:   Rendered layouts/_header.html.erb (0.2ms)
+2014-11-03T15:01:05.295571+00:00 app[web.1]:   Rendered users/new.html.erb within layouts/application (46.2ms)
+2014-11-03T15:01:05.317180+00:00 heroku[router]: sock=client at=error code=H18 desc="Request Interrupted" method=GET path="/users/sign_up" host=felcv-cochabamba.herokuapp.com request_id=d64c5c24-63ff-493a-9410-da31f5ad4eaf fwd="181.177.188.61" dyno=web.1 connect=5ms service=1057ms status=503 bytes=8688
+2014-11-03T15:01:05.295584+00:00 app[web.1]:   Rendered users/new.html.erb within layouts/application (46.2ms)
+2014-11-03T15:01:05.308850+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (8.6ms)
+2014-11-03T15:01:05.309278+00:00 app[web.1]:   Rendered layouts/_header.html.erb (0.2ms)
+2014-11-03T15:01:05.312787+00:00 app[web.1]: Completed 200 OK in 385ms (Views: 50.6ms | ActiveRecord: 21.1ms)
+2014-11-03T15:01:05.315826+00:00 app[web.1]: Started GET "/users/sign_up" for 181.177.188.61 at 2014-11-03 15:01:05 +0000
+2014-11-03T15:01:05.317765+00:00 app[web.1]: Processing by UsersController#new as HTML
+2014-11-03T15:01:05.317854+00:00 app[web.1]: Processing by UsersController#new as HTML
+2014-11-03T15:01:05.485193+00:00 app[web.1]:   Rendered users/new.html.erb within layouts/application (22.4ms)
+2014-11-03T15:01:05.485205+00:00 app[web.1]:   Rendered users/new.html.erb within layouts/application (22.4ms)
+2014-11-03T15:01:05.487521+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (1.0ms)
+2014-11-03T15:01:05.487528+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (1.0ms)
+2014-11-03T15:01:05.487728+00:00 app[web.1]:   Rendered layouts/_header.html.erb (0.1ms)
+2014-11-03T15:01:05.487734+00:00 app[web.1]:   Rendered layouts/_header.html.erb (0.1ms)
+2014-11-03T15:01:05.487957+00:00 app[web.1]: Completed 200 OK in 170ms (Views: 18.7ms | ActiveRecord: 9.5ms)
+2014-11-03T15:01:05.487963+00:00 app[web.1]: Completed 200 OK in 170ms (Views: 18.7ms | ActiveRecord: 9.5ms)
+2014-11-03T15:01:05.492369+00:00 heroku[router]: at=info method=GET path="/users/sign_up" host=felcv-cochabamba.herokuapp.com request_id=531ee732-900e-4074-b750-836fd130bd71 fwd="181.177.188.61" dyno=web.1 connect=4ms service=411ms status=304 bytes=940
+2014-11-03T15:02:09.439621+00:00 heroku[router]: at=info method=POST path="/users" host=felcv-cochabamba.herokuapp.com request_id=32b569d6-1624-4270-935d-5d8914b30f5d fwd="181.177.188.61" dyno=web.1 connect=1ms service=35ms status=500 bytes=1472
+2014-11-03T15:02:09.415195+00:00 app[web.1]: Started POST "/users" for 181.177.188.61 at 2014-11-03 15:02:09 +0000
+2014-11-03T15:02:09.419787+00:00 app[web.1]: Processing by UsersController#create as HTML
+2014-11-03T15:02:09.415085+00:00 app[web.1]: Started POST "/users" for 181.177.188.61 at 2014-11-03 15:02:09 +0000
+2014-11-03T15:02:09.419842+00:00 app[web.1]: Processing by UsersController#create as HTML
+2014-11-03T15:02:09.419987+00:00 app[web.1]:   Parameters: {"utf8"=>"✓", "authenticity_token"=>"ivw0egiZY/FV16zode8/D9LcY2OeUTWbk9MXBgsm0oI=", "user"=>{"station_id"=>"1", "ci"=>"3788218", "name"=>"Nelson", "paternal_last_name"=>"Araoz", "maternal_last_name"=>"", "birthdate"=>"18/01/1990", "grade"=>"CORONEL", "address"=>"Inocencio III", "last_work"=>"felcc", "phone"=>"4232372", "mobile"=>"77435098", "admission_date"=>"01/02/2009", "email"=>"nelson@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "status"=>"Inactivo", "role"=>"investigador"}, "commit"=>"Guardar"}
+2014-11-03T15:02:09.420029+00:00 app[web.1]:   Parameters: {"utf8"=>"✓", "authenticity_token"=>"ivw0egiZY/FV16zode8/D9LcY2OeUTWbk9MXBgsm0oI=", "user"=>{"station_id"=>"1", "ci"=>"3788218", "name"=>"Nelson", "paternal_last_name"=>"Araoz", "maternal_last_name"=>"", "birthdate"=>"18/01/1990", "grade"=>"CORONEL", "address"=>"Inocencio III", "last_work"=>"felcc", "phone"=>"4232372", "mobile"=>"77435098", "admission_date"=>"01/02/2009", "email"=>"nelson@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "status"=>"Inactivo", "role"=>"investigador"}, "commit"=>"Guardar"}
+2014-11-03T15:02:09.432244+00:00 app[web.1]: PG::GroupingError: ERROR:  column "users.id" must appear in the GROUP BY clause or be used in an aggregate function
+2014-11-03T15:02:09.432250+00:00 app[web.1]: LINE 1: SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secr...
+2014-11-03T15:02:09.432252+00:00 app[web.1]:                 ^
+2014-11-03T15:02:09.432254+00:00 app[web.1]: : SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secretaria' AND "users"."status" = 'Activo' GROUP BY station_id  ORDER BY "users"."id" ASC LIMIT 1
+2014-11-03T15:02:09.432385+00:00 app[web.1]:                 ^
+2014-11-03T15:02:09.432381+00:00 app[web.1]: PG::GroupingError: ERROR:  column "users.id" must appear in the GROUP BY clause or be used in an aggregate function
+2014-11-03T15:02:09.432714+00:00 app[web.1]: Completed 500 Internal Server Error in 13ms
+2014-11-03T15:02:09.432383+00:00 app[web.1]: LINE 1: SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secr...
+2014-11-03T15:02:09.432386+00:00 app[web.1]: : SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secretaria' AND "users"."status" = 'Activo' GROUP BY station_id  ORDER BY "users"."id" ASC LIMIT 1
+2014-11-03T15:02:09.432761+00:00 app[web.1]: Completed 500 Internal Server Error in 13ms
+2014-11-03T15:02:09.435569+00:00 app[web.1]: 
+2014-11-03T15:02:09.435573+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::GroupingError: ERROR:  column "users.id" must appear in the GROUP BY clause or be used in an aggregate function
+2014-11-03T15:02:09.435575+00:00 app[web.1]: LINE 1: SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secr...
+2014-11-03T15:02:09.435577+00:00 app[web.1]:                 ^
+2014-11-03T15:02:09.435579+00:00 app[web.1]: : SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secretaria' AND "users"."status" = 'Activo' GROUP BY station_id  ORDER BY "users"."id" ASC LIMIT 1):
+2014-11-03T15:02:09.435583+00:00 app[web.1]:   app/controllers/users_controller.rb:13:in `create'
+2014-11-03T15:02:09.435585+00:00 app[web.1]: 
+2014-11-03T15:02:09.435586+00:00 app[web.1]: 
+2014-11-03T15:02:09.435656+00:00 app[web.1]: 
+2014-11-03T15:02:09.435660+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::GroupingError: ERROR:  column "users.id" must appear in the GROUP BY clause or be used in an aggregate function
+2014-11-03T15:02:09.435661+00:00 app[web.1]: LINE 1: SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secr...
+2014-11-03T15:02:09.435663+00:00 app[web.1]:                 ^
+2014-11-03T15:02:09.435665+00:00 app[web.1]: : SELECT  "users".* FROM "users"  WHERE "users"."role" = 'secretaria' AND "users"."status" = 'Activo' GROUP BY station_id  ORDER BY "users"."id" ASC LIMIT 1):
+2014-11-03T15:02:09.435667+00:00 app[web.1]:   app/controllers/users_controller.rb:13:in `create'
+2014-11-03T15:02:09.435668+00:00 app[web.1]: 
+2014-11-03T15:02:09.435669+00:00 app[web.1]: 
