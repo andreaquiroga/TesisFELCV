@@ -14,7 +14,6 @@ def create
 	@sec = User.where(:role => "secretaria", :status => "Activo" , :station_id => @user.station_id).first
 	if params[:user][:role] == "secretaria" 
 		if @sec == nil 
-			
 			@user.valid?
 			if @user.errors.blank?
 				if @user.save(:validate=>false)
@@ -28,7 +27,6 @@ def create
 			flash[:notice] = "La unidad ya tiene secretaria registrada."
 			render :action => "new"
 		end
-	end
 	else
 		if @user.role?("investigador")
 			@max=User.maximum("turn")
@@ -43,6 +41,7 @@ def create
 		else
 			render :action => "new"
 		end
+	end
 end
 
 def index
