@@ -10,10 +10,11 @@ def new
 end
 
 def create
-	@sec = User.group('station_id', 'id').where(:role => "secretaria", :status => "Activo" ).first
+	@user = User.new(user_params)
+	@sec = User.where(:role => "secretaria", :status => "Activo" , :station_id => @user.station_id).first
 	if params[:user][:role] == "secretaria" 
 		if @sec == nil 
-			@user = User.new(user_params)
+			
 			@user.valid?
 			if @user.errors.blank?
 				if @user.save(:validate=>false)
@@ -29,7 +30,6 @@ def create
 		end
 	end
 	else
-		@user = User.new(user_params)
 		if @user.role?("investigador")
 			@max=User.maximum("turn")
 			@user.turn=(@max.to_i+1).to_s
