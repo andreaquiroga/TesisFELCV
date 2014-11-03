@@ -22,6 +22,7 @@ module Felcv
     config.i18n.default_locale = :es
     config.assets.initialize_on_precompile = false
     I18n.config.enforce_available_locales = true
+    config.serve_static_assets = true
     #config.middleware.use WickedPdf::Middleware
   end
 end
