@@ -49,20 +49,25 @@ class CasesController < ApplicationController
     @case = Case.new
     @case.init_date = Date.today
     @case.code="felcv"
-    @user=User.new
-    @user=User.where('status = ? and role = ?', "Activo", "investigador").order("turn ASC").first
-    @case.user_id=@user.id
-    @case.save
-    @user.turn = User.maximum("turn") + 1
-    @user.save(:validate => false)    
-    @case_complete = Case.find(@case.id)
-    @case_complete.code = "felcv-"+@case.id.to_s+"-cbba"
-    if @case_complete.save
-      UserMailer.new_case_mailer(@case, @user).deliver
-      flash[:notice] = "Caso creado."
-      redirect_to case_path(@case.id)
+    
+    @user=User.where('status = ? and role = ? and station_id= ?', "Activo", "investigador", current_user.station_id).order("turn ASC").first
+    if @user != nil
+      @case.user_id=@user.id
+      @case.save
+      @user.turn = User.maximum("turn") + 1
+      @user.save(:validate => false)    
+      @case_complete = Case.find(@case.id)
+      @case_complete.code = "felcv-"+@case.id.to_s+"-cbba"
+      if @case_complete.save
+        UserMailer.new_case_mailer(@case, @user).deliver
+        flash[:notice] = "Caso creado."
+        redirect_to case_path(@case.id)
+      else
+        flash[:notice] = "Error al crear el caso, contacte al administrador."
+        redirect_to root_path
+      end
     else
-      flash[:notice] = "Error al crear el caso, contacte al administrador."
+      flash[:warning] = "No existen investigadores disponibles para la asignacion de casos"
       redirect_to root_path
     end
   end
