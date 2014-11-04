@@ -12,9 +12,11 @@
 	      function drawChart() {
 	        var data = google.visualization.arrayToDataTable([
 	          ['Task', 'Hours per Day'],
-	         
-	          ['Agresion fisica', <%= @f %>],
-	          ['Agresion psicologica',   <%= @p %>]
+	         <% @cases.each do |c| %>
+
+	         ["<%=c.nature%>", <%=c.total%>],
+	         <%end%>
+	         [" ", 0]
 	        ]);
 
 	        var options = {

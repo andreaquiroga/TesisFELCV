@@ -46,7 +46,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-home"></span>&nbsp;Unidades <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
-            <%= link_to new_station_path do %>
+            <%= link_to new_station_path,'data-no-turbolink' => true do %>
             <span class="glyphicon glyphicon-plus-sign"></span> Nueva Unidad
             <% end %>
             </li>
@@ -70,6 +70,11 @@
           <li>
           <%= link_to cases_path do %>
           <span class="glyphicon glyphicon-th-list"></span> Ver Casos
+          <% end %>
+          </li>
+          <li>
+          <%= link_to cases_mine_station_path do %>
+          <span class="glyphicon glyphicon-list-alt"></span> Ver Casos De Mi Unidad
           <% end %>
           </li>
         </ul>

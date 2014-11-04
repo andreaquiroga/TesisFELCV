@@ -30,7 +30,7 @@
           <label>CI:</label>
           <%= d.text_field :police_ci, :class=>'form-control' %>
           <label>Grado:</label>
-          <%=d.collection_select(:police_grade, Grade.all, :name, :name, {prompt: "-Seleccionar un grado-"}, {class:"form-control"})%><br/>
+          <%= d.select :station_id, Grade.find(:all).collect {|u| [u.name, u.name]}, {:multiple => false,:prompt=>"-Seleccionar un grado-"}, :class => "form-control", :required => true %>
           <label>Telefono/Celular:</label>
           <%= d.text_field :police_phone, :class=>'form-control' %>
           <label>Unidad:</label>

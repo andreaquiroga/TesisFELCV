@@ -1,6 +1,6 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show, :edit, :update, :destroy]
-
+  skip_before_filter :verify_authenticity_token
   #simple search
   def simple_search
     @cases = Case.search(params[:code])
@@ -26,13 +26,35 @@ class CasesController < ApplicationController
   # GET /cases
   # GET /cases.json
   def index
-    @mine=false
+    @mine = false
     @cases = Case.all
   end
 
   def index_mine
-    @mine=true
+    @mine = true
     @cases = Case.where(:user_id=>current_user.id)
+  end
+
+  def index_mine_station
+    @mine = false
+    @cases = Case.joins(:user).where('users.station_id = ?', current_user.station_id)
+  end
+
+  def reassign_case
+    @case = Case.find(params[:id])
+    @users = User.where('status = ? and role = ? and station_id= ?', "Activo", "investigador", current_user.station_id)
+  end
+
+  def assign
+    @case=Case.find(params[:id])
+    @case.user_id = params[:users]
+    if @case.save
+      flash[:notice] = "Caso reasignado correctamente!"
+      redirect_to cases_path
+    else
+      flash[:error] = "No se puedo reasignar el caso"
+      redirect_to :back
+    end
   end
 
   # GET /cases/1

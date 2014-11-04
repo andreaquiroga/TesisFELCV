@@ -25,7 +25,7 @@
             <%= l.hidden_field  :id, :class=>"form-control"%>
             <%= l.hidden_field  :case_id , :class=>"form-control"%>
             <label><b>Relacion con el Caso:</b></label>      
-            <%= l.collection_select :role, PersonRole.all, :text, :text, {prompt: "-Seleccionar un papel-"}, {class:"form-control"} %><br/>
+            <%= l.select :role, PersonRole.find(:all).collect {|u| [u.text, u.text]}, {:multiple => false,:prompt=>"-Seleccionar un papel-"}, :class => "form-control", :required => true %>
           <%end%>
           <%= f.hidden_field  :id %>
         	<label>CI:</label>
@@ -39,9 +39,9 @@
         	<label>Fecha de nacimiento:</label>
         	<%= f.text_field :birthdate, 'data-behaviour' => 'datepicker' , :class=>"form-control"%>
         	<label>Genero:</label>
-          <%= f.collection_select :gender, Gender.all, :text, :text, {prompt: "-Seleccionar un genero-"}, {class:"form-control"} %><br/>
+          <%= f.select :gender, Gender.find(:all).collect {|u| [u.text, u.text]}, {:multiple => false,:prompt=>"-Seleccionar genero-"}, :class => "form-control", :required => true %>
           <label>Estado Civil:</label>
-          <%= f.collection_select :civil_status, CivilStatus.all, :name, :name, {prompt: "-Seleccionar un estado civil-"}, {class:"form-control"} %><br/>
+          <%= f.select :civil_status, CivilStatus.find(:all).collect {|u| [u.name, u.name]}, {:multiple => false,:prompt=>"-Seleccionar un estado civil-"}, :class => "form-control", :required => true %>
           <label>Nacionalidad:</label>   
           <%= f.text_field :nationality , :class=>"form-control"%>
           <label>Ciudad de Nacimiento:</label>

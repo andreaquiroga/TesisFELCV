@@ -8,16 +8,14 @@ class ReportsController < ApplicationController
     @reports = Report.all
     respond_with(@reports)
   end
-
+ 
   def show
     respond_with(@report)
   end
 
   def new
     @report = Report.new
-    @cases = Complaint.group('nature').count('id')
-    @f = @cases['agresion fisica']
-    @p = @cases['agresion psicologica']
+    @cases = Complaint.select("COUNT(complaints.id) AS total, *").group('nature')
     @report.name = "TIPO AGRESION"
     @report.date = Date.today
     if Date.today.day == 1
@@ -30,17 +28,11 @@ class ReportsController < ApplicationController
         @result.save
       end
     end
-    @resp = Result.where(:report_id => @report.id)
   end
 
   def second
     @report = Report.new
-    @cases = Case.joins(:user).group('station_id').count('id')
-    @a = @cases[1]
-    @b = @cases[2]
-    @c = @cases[3]
-    @d = @cases[4]
-    @e = @cases[5]
+    @cases = Case.joins(:user).select("COUNT(cases.id) AS total, *").group('station_id')
     @report.name = "CANTIDAD CASOS"
     @report.date = Date.today
     if Date.today.day == 1
@@ -57,9 +49,7 @@ class ReportsController < ApplicationController
 
   def third
     @report = Report.new
-    @cases = Link.joins(:person).where('role = ?', 'Victima').group('gender').count('id')
-    @f = @cases['Femenino']
-    @m = @cases['Masculino']
+    @cases = Link.joins(:person).where('role = ?', 'Victima').select("COUNT(links.id) AS total, *").group('gender')
     @report.name = "GENERO VICTIMAS"
     @report.date = Date.today
     if Date.today.day == 1
@@ -76,9 +66,7 @@ class ReportsController < ApplicationController
 
   def fourth
     @report = Report.new
-    @cases = Link.joins(:person).where('role = ?', 'Agresor').group('gender').count('id')
-    @f = @cases['Femenino']
-    @m = @cases['Masculino']
+   @cases = Link.joins(:person).where('role = ?', 'Agresor').select("COUNT(links.id) AS total, *").group('gender')
     @report.name = "GENERO AGRESOR"
     @report.date = Date.today
     if Date.today.day == 1

@@ -23,6 +23,7 @@ Felcv::Application.routes.draw do
   #cases
   get 'cases/index' => 'cases#index', :as => 'cases'
   get 'cases/index_mine' => 'cases#index_mine', :as => 'cases_mine'
+  get 'cases/index_mine_station' => 'cases#index_mine_station', :as => 'cases_mine_station'
   get 'cases/view/:id' => 'cases#show', :as => 'case'
   get 'cases/new' => 'cases#new', :as => 'new_case'
   post 'cases/create' => 'cases#create', :as => 'create_case'
@@ -30,6 +31,8 @@ Felcv::Application.routes.draw do
   get 'cases/update/:id' => 'cases#update', :as => 'update_case'
   get 'cases/simple_search' => 'cases#simple_search', :as => 'simple_search'
   get 'cases/advanced_search' => 'cases#advanced_search', :as => 'advanced_search'
+  get 'cases/reassign_case/:id' => 'cases#reassign_case', :as => 'reassign_case'
+  post 'cases/assign' => 'cases#assign', :as => 'assign'
 
   #complaint
   get 'complaints/view/:id' => 'complaints#show', :as => 'complaint'
@@ -106,6 +109,7 @@ Felcv::Application.routes.draw do
   post 'reports/create' => 'reports#create', :as => 'create_report'
   get 'reports/second' => 'reports#second', :as => 'second_report'
   get  'reports/third' => 'reports#third', :as => 'third_report'
+  get  'reports/fourth' => 'reports#fourth', :as => 'fourth_report'
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -38,7 +38,7 @@
       <% end %>
     <ul class="dropdown-menu">
       <li>
-        <%= link_to new_person_path(@case.id) do %>
+        <%= link_to new_person_path(@case.id),'data-no-turbolink' => true do %>
         <span class="glyphicon glyphicon-plus-sign"></span> Persona Involucrada
         <% end %>
       </li>

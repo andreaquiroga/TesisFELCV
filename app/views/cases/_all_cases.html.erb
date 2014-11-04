@@ -63,6 +63,9 @@
             <%end%>
           <%else%>
             <h5 class="list-group-item-heading">"No hay personas involucradas registradas"</h5>
+          <%end%><br/>
+          <%if current_user.role=='secretaria' && c.user.station_id==current_user.station_id%>
+          <span class="glyphicon glyphicon-random" style="vertical-align:-1px;  margin-right:7px; "></span><%= link_to "Reasignar Caso", reassign_case_path(c.id.to_s)%>
           <%end%>
         </div>
       </div>

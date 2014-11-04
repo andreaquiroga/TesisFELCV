@@ -12,9 +12,11 @@
 	      function drawChart() {
 	        var data = google.visualization.arrayToDataTable([
 	          ['Task', 'Hours per Day'],
-	         
-	          ['Femenino', <%= @f %>],
-	          ['Masculino',   <%= @m %>]
+	         <% @cases.each do |c| %>
+
+	         ["<%=c.person.gender%>", <%=c.total%>],
+	         <%end%>
+	         ["algo", 0]
 	        ]);
 
 	        var options = {
@@ -31,6 +33,12 @@
 	    <div id="piechart_3d" style="width: 750px; height: 500px;"></div>
 	  </body>
 	</html>
+	<form class="navbar-form navbar-left" method="get" action=<%=second_report_path%> >
+		<button class="btn btn-primary" type="submit">Anterior</button>
+	</form>
+	<form class="navbar-form navbar-left" method="get" action=<%=fourth_report_path%> >
+		<button class="btn btn-primary" type="submit">Siguiente</button>
+	</form>
   </div>
   </div>
 </div>

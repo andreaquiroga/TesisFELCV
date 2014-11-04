@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-10">
+  <div class="jumbotron">
+  <%= image_tag("police.jpg", :height=>"80", :width=>"70", :align=>"left") %><%= image_tag("bpaf.png", :height=>"80", :width=>"70", :align=>"right") %><br/><center><h2>REASIGNACION</h2></center><br/><br/><br/>
+	<form action=<%=assign_path%> method="post">
+		<input type="hidden" name="id" value="<%=@case.id%>">
+		<select class="form-control" name="users">
+			<% @users.each do |u| %>
+			<option value="<%=u.id%>"><%=u.name+" "+u.paternal_last_name%></option>
+			<% end %>
+		</select><br/><br/>
+		<input type="submit" value="Reasignar" class="btn btn-primary">
+	</form>
+	</div>
+	</div>
+</div>

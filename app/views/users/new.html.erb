@@ -1,7 +1,7 @@
 <div class="col-lg-1"></div>
 <div class="col-lg-11">
 <div class="jumbotron">
-	<center><h2>REGISTRARSE</h2></center><br/>
+	<center><h2>REGISTRAR USUARIO</h2></center><br/>
 	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |o| %>
   	
   	<% if resource.errors.any? %>
@@ -19,8 +19,8 @@
 	  	  <div class="col-lg-1">
 	  	  </div>
 	  	  <div class="col-lg-10">
-	  	  	  <label>Unidad:</label>
-	          <%=o.collection_select(:station_id, Station.all, :id, :name, {prompt: "-Seleccionar una unidad-"}, {class:"form-control"})%><br/>
+	  	  	  <label>Unidad:</label>	         
+	         <%= o.select :station_id, Station.find(:all).collect {|u| [u.name, u.id]}, {:multiple => false,:prompt=>"-Seleccionar unidad-"}, :class => "form-control", :required => true %>
 	  	  	  <label>CI:</label>
 	          <%= o.text_field :ci, :class=>'form-control' %>
 	          <label>Nombre:</label>
@@ -32,7 +32,7 @@
 	          <label>Fecha Nacimiento:</label>
 	          <%= o.text_field :birthdate, 'data-behaviour' => 'datepicker', :class=>'form-control'%>
 	          <label>Grado:</label>
-	          <%=o.collection_select(:grade, Grade.all, :name, :name, {prompt: "-Seleccionar un grado-"}, {class:"form-control"})%><br/>
+	          <%= o.select :grade, Grade.find(:all).collect {|u| [u.name, u.name]}, {:multiple => false,:prompt=>"-Seleccionar un grado-"}, :class => "form-control", :required => true %>
 	          <label>Direccion:</label>
 	          <%= o.text_field :address, :class=>'form-control' %>
 	          <label>Ultimo Destino:</label>
@@ -45,12 +45,11 @@
 	          <%= o.text_field :admission_date, 'data-behaviour' => 'datepicker', :class=>'form-control' %>        
               <label>Email:</label>
 		  	  <%= o.text_field :email, :class=>"form-control"  %>
-		      <!--<label>Contrasenia:</label>-->
 	    	  <%= o.hidden_field :password, autocomplete: "off", :class=>"form-control" %>
 	    	  <%= o.hidden_field :password_confirmation, autocomplete: "off", :class=>"form-control" %>
 	    	  <%= o.hidden_field :status, :class=>'form-control' %>
 		      <label>Rol de usuario:</label>
-	    	  <%=o.collection_select :role, Role.all, :name, :name, {prompt: "-Seleccionar un rol-"}, {class:"form-control"} %><br/>
+	    	  <%= o.select :role, Role.find(:all).collect {|u| [u.name, u.name]}, {:multiple => false,:prompt=>"-Seleccionar un rol-"}, :class => "form-control", :required => true %><br/>
 	          <div><%= o.submit "Guardar", :class=>"btn btn-primary" %></div><br/>
 	          
     	  </div>
